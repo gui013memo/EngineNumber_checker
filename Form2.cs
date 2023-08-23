@@ -12,18 +12,22 @@ namespace EngineNumber_checker
 {
     public partial class IntervalForm : Form
     {
+
         int timerTickMsValue = 1000;
         int timerTickMsValueSaved = 0;
 
         int engineLifeTimeMsValue = 3;
         int engineLifeTimeSaved = 0;
 
-
-        public IntervalForm(int timerTickMsValue, int engineLifeTime)
+        Form1 form1;
+        public IntervalForm(Form1 f)
         {
             InitializeComponent();
+            form1 = f;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ApplicationProperties_FormClosing);
         }
+
+        private Form1 mainForm = null;
 
         private void ApplicationProperties_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -55,7 +59,7 @@ namespace EngineNumber_checker
 
         public void btn_Save_Click(object sender, EventArgs e)
         {
-            Form1 form1 = new Form1();
+
             form1.SaveParameters();
 
             this.Hide();

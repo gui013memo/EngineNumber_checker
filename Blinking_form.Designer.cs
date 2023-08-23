@@ -50,6 +50,7 @@
             btn_StopAfterTrigger.TabIndex = 0;
             btn_StopAfterTrigger.Text = "STOP";
             btn_StopAfterTrigger.UseVisualStyleBackColor = false;
+            btn_StopAfterTrigger.Click += btn_StopAfterTrigger_Click;
             // 
             // btn_ContinueAfterTrigger
             // 
@@ -64,6 +65,7 @@
             btn_ContinueAfterTrigger.TabIndex = 1;
             btn_ContinueAfterTrigger.Text = "CONTINUE";
             btn_ContinueAfterTrigger.UseVisualStyleBackColor = false;
+            btn_ContinueAfterTrigger.Click += btn_ContinueAfterTrigger_Click;
             // 
             // lb_EngineRepeated
             // 

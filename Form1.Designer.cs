@@ -33,9 +33,9 @@
             Timer2 = new System.Windows.Forms.Timer(components);
             lb_Timer_Tick = new Label();
             pn_StopRunning = new Panel();
+            btn_Options = new Button();
             tb_Console = new TextBox();
             pn_AtlasLogo = new Panel();
-            btn_Options = new Button();
             pn_StopRunning.SuspendLayout();
             SuspendLayout();
             // 
@@ -83,6 +83,21 @@
             pn_StopRunning.Size = new Size(556, 66);
             pn_StopRunning.TabIndex = 5;
             // 
+            // btn_Options
+            // 
+            btn_Options.BackColor = Color.SlateGray;
+            btn_Options.FlatAppearance.BorderSize = 0;
+            btn_Options.FlatStyle = FlatStyle.Flat;
+            btn_Options.Font = new Font("Segoe UI", 13F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_Options.ForeColor = Color.White;
+            btn_Options.Location = new Point(452, 0);
+            btn_Options.Name = "btn_Options";
+            btn_Options.Size = new Size(104, 63);
+            btn_Options.TabIndex = 7;
+            btn_Options.Text = "Options";
+            btn_Options.UseVisualStyleBackColor = false;
+            btn_Options.Click += btn_Options_Click;
+            // 
             // tb_Console
             // 
             tb_Console.BackColor = Color.White;
@@ -103,21 +118,6 @@
             pn_AtlasLogo.Name = "pn_AtlasLogo";
             pn_AtlasLogo.Size = new Size(267, 128);
             pn_AtlasLogo.TabIndex = 6;
-            // 
-            // btn_Options
-            // 
-            btn_Options.BackColor = Color.SlateGray;
-            btn_Options.FlatAppearance.BorderSize = 0;
-            btn_Options.FlatStyle = FlatStyle.Flat;
-            btn_Options.Font = new Font("Segoe UI", 13F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_Options.ForeColor = Color.White;
-            btn_Options.Location = new Point(452, 0);
-            btn_Options.Name = "btn_Options";
-            btn_Options.Size = new Size(104, 63);
-            btn_Options.TabIndex = 7;
-            btn_Options.Text = "Options";
-            btn_Options.UseVisualStyleBackColor = false;
-            btn_Options.Click += btn_Options_Click;
             // 
             // Form1
             // 
@@ -141,12 +141,12 @@
         }
 
         #endregion
-        private Button btn_Start;
-        private System.Windows.Forms.Timer Timer2;
         private Label lb_Timer_Tick;
         private Panel pn_StopRunning;
-        private TextBox tb_Console;
         private Panel pn_AtlasLogo;
         private Button btn_Options;
+        public TextBox tb_Console;
+        public System.Windows.Forms.Timer Timer2;
+        public Button btn_Start;
     }
 }

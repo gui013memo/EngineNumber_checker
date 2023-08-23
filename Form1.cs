@@ -22,12 +22,16 @@ namespace EngineNumber_checker
 
         Plc PLC_M1 = new Plc(CpuType.S7300, "140.100.101.1", 0, 2); //MY PC IP ADDRESS: 140.100.101.9 
 
-        IntervalForm form2 = new IntervalForm(1000, 3);
-        int engineLifeTime = 3;
+        Blinking_form blinking_Form;
 
-       
+        int engineLifeTime = 3;
+        IntervalForm form2;
+
+
         public Form1()
         {
+            blinking_Form = new Blinking_form(this);
+            form2 = new IntervalForm(this);
             InitializeComponent();
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormIsClosing);
@@ -39,9 +43,14 @@ namespace EngineNumber_checker
             my_logger.Log("EngineNumber-Checker app Closed!");
         }
 
+        public void Log(string msg)
+        {
+            my_logger.Log(msg);
+        }
+
         public void EngineDuplicate()
         {
-            
+            blinking_Form.Show();
         }
 
         public int GetProcessID(string processName)
@@ -177,35 +186,37 @@ namespace EngineNumber_checker
 
         private void btn_Start_Click(object sender, EventArgs e)
         {
-            if (startBtn)
-            {
-                if (tb_Console.Text == null)
-                    pn_AtlasLogo.Show();
+            EngineDuplicate();
 
-                btn_Start.BackColor = Color.Green;
-                btn_Start.Text = "Start";
-                startBtn = false;
-                lb_Timer_Tick.BackColor = Color.LightSlateGray;
-                pn_StopRunning.BackColor = Color.LightSlateGray;
-                lb_Timer_Tick.Text = "Stopped";
+            //if (startBtn)
+            //{
+            //    if (tb_Console.Text == null)
+            //        pn_AtlasLogo.Show();
 
-                Timer2.Stop();
-                my_logger.Log("EngineNumber-Checker Stopped!");
-            }
-            else
-            {
-                pn_AtlasLogo.Hide();
+            //    btn_Start.BackColor = Color.Green;
+            //    btn_Start.Text = "Start";
+            //    startBtn = false;
+            //    lb_Timer_Tick.BackColor = Color.LightSlateGray;
+            //    pn_StopRunning.BackColor = Color.LightSlateGray;
+            //    lb_Timer_Tick.Text = "Stopped";
 
-                Timer2_Tick(sender, e);
+            //    Timer2.Stop();
+            //    my_logger.Log("EngineNumber-Checker Stopped!");
+            //}
+            //else
+            //{
+            //    pn_AtlasLogo.Hide();
 
-                btn_Start.BackColor = Color.Crimson;
-                btn_Start.Text = "Stop";
-                startBtn = true;
-                lb_Timer_Tick.Text = "Running";
+            //    Timer2_Tick(sender, e);
 
-                Timer2.Start();
-                my_logger.Log("EngineNumber-Checker Started!");
-            }
+            //    btn_Start.BackColor = Color.Crimson;
+            //    btn_Start.Text = "Stop";
+            //    startBtn = true;
+            //    lb_Timer_Tick.Text = "Running";
+
+            //    Timer2.Start();
+            //    my_logger.Log("EngineNumber-Checker Started!");
+            //}
 
 
         }
@@ -232,6 +243,7 @@ namespace EngineNumber_checker
         {
             Timer2.Interval = form2.getTimerTickMsValue;
             engineLifeTime = form2.getEngineLifeTimeMsValueInt;
+            tb_Console.Text = "SAVED";
         }
 
         private void btn_Options_Click(object sender, EventArgs e)
