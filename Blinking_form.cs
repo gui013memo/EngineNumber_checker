@@ -18,24 +18,34 @@ namespace EngineNumber_checker
 
         string date = "";
         string time = "";
+
         public Blinking_form(Form1 f)
+        {
+            this.TopMost = true;
+
+            form1 = f;
+
+            InitializeComponent();
+
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ApplicationProperties_FormClosing);
+
+
+        }
+
+        public void RefreshDataForF3()
         {
             date = form1.queryResultREG_DT;
             time = form1.queryResultREG_TM;
 
-            date = date.Insert(4, "-");
-            date = date.Insert(7, "-");
+            date = date.Insert(4, "/");
+            date = date.Insert(7, "/");
 
-            time = time.Insert(2, "-");
-            time = time.Insert(5, "-");
+            time = time.Insert(2, ":");
+            time = time.Insert(5, ":");
 
-            InitializeComponent();
-            form1 = f;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ApplicationProperties_FormClosing);
             this.lb_RepeatedEngNumValue.Text = form1.CurrentEngine;
-            this.lb_BlockLinkedValue.Text = form1.queryResultQualityData;
-            this.lb_BlockLinkedDate.Text = date + " " + time;
-
+            this.lb_BlockLinkedValue.Text = form1.queryResultQualityData.Substring(0,13);
+            this.lb_BlockLinkedDate.Text = "(" + date + " " + time + ")";
         }
 
         private void ApplicationProperties_FormClosing(object sender, FormClosingEventArgs e)
@@ -52,6 +62,7 @@ namespace EngineNumber_checker
             form1.Log("PLC_Client Adapter process resumed!");
             form1.tb_Console.Text = "PLC_Client Adapter process resumed!" + form1.tb_Console.Text;
             form1.Timer2.Start();
+            this.Hide();
         }
 
         private void btn_StopAfterTrigger_Click(object sender, EventArgs e)
@@ -60,6 +71,7 @@ namespace EngineNumber_checker
             form1.Log("PLC_Client Adapter process killed!");
             form1.tb_Console.Text = "PLC_Client Adapter process killed!" + form1.tb_Console.Text;
             form1.Timer2.Start();
+            this.Hide();
         }
     }
 }

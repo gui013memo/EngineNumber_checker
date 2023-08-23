@@ -54,6 +54,7 @@ namespace EngineNumber_checker
 
         public void EngineDuplicate()
         {
+            blinking_Form.RefreshDataForF3();
             blinking_Form.Show();
         }
 
@@ -209,7 +210,7 @@ namespace EngineNumber_checker
 
         private void Timer2_Tick(object sender, EventArgs e)
         {
-            Timer2.Interval = form2.getTimerTickMsValue;
+            //Timer2.Interval = form2.getTimerTickMsValue;
 
             EngineValidate();
 

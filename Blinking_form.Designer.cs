@@ -118,7 +118,7 @@
             lb_BlockLinkedDate.BackColor = Color.White;
             lb_BlockLinkedDate.Font = new Font("Calibri", 64F, FontStyle.Bold, GraphicsUnit.Point);
             lb_BlockLinkedDate.ForeColor = Color.Black;
-            lb_BlockLinkedDate.Location = new Point(320, 459);
+            lb_BlockLinkedDate.Location = new Point(413, 486);
             lb_BlockLinkedDate.Name = "lb_BlockLinkedDate";
             lb_BlockLinkedDate.Size = new Size(1110, 131);
             lb_BlockLinkedDate.TabIndex = 6;

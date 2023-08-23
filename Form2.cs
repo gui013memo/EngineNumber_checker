@@ -14,10 +14,12 @@ namespace EngineNumber_checker
     {
 
         int timerTickMsValue = 1000;
-        int timerTickMsValueSaved = 0;
+        int timerTickMsValueSaved = 1000;
 
         int engineLifeTimeMsValue = 3;
-        int engineLifeTimeSaved = 0;
+        int engineLifeTimeSaved = 3;
+        string connectionString = "172.16.0.1";
+        string connectionStringSaved = "";
 
         Form1 form1;
         public IntervalForm(Form1 f)
@@ -31,6 +33,13 @@ namespace EngineNumber_checker
 
         private void ApplicationProperties_FormClosing(object sender, FormClosingEventArgs e)
         {
+            tb_TimerTickValue.Text = timerTickMsValueSaved.ToString() + "ms";
+            tb_EngineLifeTimeValue.Text = engineLifeTimeSaved.ToString() + " Sec";
+            timerTickMsValue = timerTickMsValueSaved;
+            engineLifeTimeMsValue = engineLifeTimeSaved;
+
+            tb_ConnectionString.Text = connectionString;
+
             //Hiding the window, because closing it makes the window unaccessible.
             this.Hide();
             this.Parent = null;
@@ -59,6 +68,10 @@ namespace EngineNumber_checker
 
         public void btn_Save_Click(object sender, EventArgs e)
         {
+            timerTickMsValueSaved = timerTickMsValue;
+            engineLifeTimeSaved = engineLifeTimeMsValue;
+            tb_ConnectionString.Text = connectionStringSaved;
+            connectionString = connectionStringSaved;
 
             form1.SaveParameters();
 
@@ -81,6 +94,11 @@ namespace EngineNumber_checker
                 engineLifeTimeMsValue -= 1;
                 tb_EngineLifeTimeValue.Text = engineLifeTimeMsValue.ToString() + " Sec";
             }
+        }
+
+        private void tb_ConnectionString_TextChanged(object sender, EventArgs e)
+        {
+            connectionStringSaved = tb_ConnectionString.Text;
         }
 
         public int getTimerTickMsValue

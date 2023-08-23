@@ -140,6 +140,7 @@
             tb_ConnectionString.TabIndex = 10;
             tb_ConnectionString.Text = "172.16.0.1";
             tb_ConnectionString.TextAlign = HorizontalAlignment.Center;
+            tb_ConnectionString.TextChanged += tb_ConnectionString_TextChanged;
             // 
             // label1
             // 
