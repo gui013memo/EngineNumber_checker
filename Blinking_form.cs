@@ -16,12 +16,26 @@ namespace EngineNumber_checker
 
         Form1 form1;
 
+        string date = "";
+        string time = "";
         public Blinking_form(Form1 f)
         {
+            date = form1.queryResultREG_DT;
+            time = form1.queryResultREG_TM;
+
+            date = date.Insert(4, "-");
+            date = date.Insert(7, "-");
+
+            time = time.Insert(2, "-");
+            time = time.Insert(5, "-");
+
             InitializeComponent();
             form1 = f;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ApplicationProperties_FormClosing);
-            this.lb_RepeatedEngNum.Text = form1.CurrentEngine;
+            this.lb_RepeatedEngNumValue.Text = form1.CurrentEngine;
+            this.lb_BlockLinkedValue.Text = form1.queryResultQualityData;
+            this.lb_BlockLinkedDate.Text = date + " " + time;
+
         }
 
         private void ApplicationProperties_FormClosing(object sender, FormClosingEventArgs e)

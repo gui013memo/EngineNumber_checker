@@ -18,6 +18,9 @@ namespace EngineNumber_checker
         string connetionString;
         string timeOffSetForSQL = "3";
         public string CurrentEngine = "";
+        public string queryResultQualityData = "";
+        public string queryResultREG_TM = "";
+        public string queryResultREG_DT = "";
 
         bool startBtn = false;
 
@@ -109,6 +112,8 @@ namespace EngineNumber_checker
                 string query = "SELECT TOP (1)" +
                 "[ENG_NO]" +
                 ",[QUALITY_DATA]" +
+                ",[REG_DT]" +
+                ",[REG_TM]" +
                 "FROM [HMB].[MES].[Q_QUALITY_SEND_IF]" +
                 "WHERE " +
                 "ENG_NO = " + "'" + CurrentEngine + "'" +
@@ -122,7 +127,7 @@ namespace EngineNumber_checker
                 command = new SqlCommand(query, cnn);
                 reader = command.ExecuteReader();
 
-                object[] results = new object[2];
+                object[] results = new object[4];
                 while (reader.Read())
                 {
                     reader.GetValues(results);
@@ -131,7 +136,9 @@ namespace EngineNumber_checker
                 if (results[0] != null)
                 {
                     string queryResultEngine = results[0].ToString();
-                    string queryResultQualityData = results[1].ToString().Substring(41);
+                    queryResultQualityData = results[1].ToString().Substring(41);
+                    queryResultREG_DT = results[2].ToString();
+                    queryResultREG_TM = results[3].ToString();
 
                     if (queryResultEngine != null)
                     {

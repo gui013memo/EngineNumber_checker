@@ -31,11 +31,11 @@
             btn_StopAfterTrigger = new Button();
             btn_ContinueAfterTrigger = new Button();
             lb_EngineRepeated = new Label();
-            lb_RepeatedEngNum = new Label();
-            label2 = new Label();
-            label3 = new Label();
-            label4 = new Label();
-            label5 = new Label();
+            lb_RepeatedEngNumValue = new Label();
+            lb_BlockAlreadyLinked = new Label();
+            lb_BlockLinkedValue = new Label();
+            lb_BlockLinkedDate = new Label();
+            lb_DoYouWantToContinue = new Label();
             SuspendLayout();
             // 
             // btn_StopAfterTrigger
@@ -78,63 +78,63 @@
             lb_EngineRepeated.TabIndex = 2;
             lb_EngineRepeated.Text = "ENGINE REPEATED:";
             // 
-            // lb_RepeatedEngNum
+            // lb_RepeatedEngNumValue
             // 
-            lb_RepeatedEngNum.AutoSize = true;
-            lb_RepeatedEngNum.BackColor = Color.White;
-            lb_RepeatedEngNum.Font = new Font("Calibri", 68F, FontStyle.Bold, GraphicsUnit.Point);
-            lb_RepeatedEngNum.ForeColor = Color.Black;
-            lb_RepeatedEngNum.Location = new Point(762, 103);
-            lb_RepeatedEngNum.Name = "lb_RepeatedEngNum";
-            lb_RepeatedEngNum.Size = new Size(407, 140);
-            lb_RepeatedEngNum.TabIndex = 3;
-            lb_RepeatedEngNum.Text = "070123";
+            lb_RepeatedEngNumValue.AutoSize = true;
+            lb_RepeatedEngNumValue.BackColor = Color.White;
+            lb_RepeatedEngNumValue.Font = new Font("Calibri", 68F, FontStyle.Bold, GraphicsUnit.Point);
+            lb_RepeatedEngNumValue.ForeColor = Color.Black;
+            lb_RepeatedEngNumValue.Location = new Point(762, 103);
+            lb_RepeatedEngNumValue.Name = "lb_RepeatedEngNumValue";
+            lb_RepeatedEngNumValue.Size = new Size(407, 140);
+            lb_RepeatedEngNumValue.TabIndex = 3;
+            lb_RepeatedEngNumValue.Text = "070123";
             // 
-            // label2
+            // lb_BlockAlreadyLinked
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Calibri", 68F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(357, 225);
-            label2.Name = "label2";
-            label2.Size = new Size(1227, 140);
-            label2.TabIndex = 4;
-            label2.Text = "BLOCK ALREADY LINKED:";
+            lb_BlockAlreadyLinked.AutoSize = true;
+            lb_BlockAlreadyLinked.Font = new Font("Calibri", 68F, FontStyle.Bold, GraphicsUnit.Point);
+            lb_BlockAlreadyLinked.Location = new Point(357, 225);
+            lb_BlockAlreadyLinked.Name = "lb_BlockAlreadyLinked";
+            lb_BlockAlreadyLinked.Size = new Size(1227, 140);
+            lb_BlockAlreadyLinked.TabIndex = 4;
+            lb_BlockAlreadyLinked.Text = "BLOCK ALREADY LINKED:";
             // 
-            // label3
+            // lb_BlockLinkedValue
             // 
-            label3.AutoSize = true;
-            label3.BackColor = Color.White;
-            label3.Font = new Font("Segoe UI", 60F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.ForeColor = Color.Black;
-            label3.Location = new Point(549, 342);
-            label3.Name = "label3";
-            label3.Size = new Size(845, 133);
-            label3.TabIndex = 5;
-            label3.Text = "B1B1DB2209211";
+            lb_BlockLinkedValue.AutoSize = true;
+            lb_BlockLinkedValue.BackColor = Color.White;
+            lb_BlockLinkedValue.Font = new Font("Segoe UI", 60F, FontStyle.Bold, GraphicsUnit.Point);
+            lb_BlockLinkedValue.ForeColor = Color.Black;
+            lb_BlockLinkedValue.Location = new Point(549, 342);
+            lb_BlockLinkedValue.Name = "lb_BlockLinkedValue";
+            lb_BlockLinkedValue.Size = new Size(845, 133);
+            lb_BlockLinkedValue.TabIndex = 5;
+            lb_BlockLinkedValue.Text = "B1B1DB2209211";
             // 
-            // label4
+            // lb_BlockLinkedDate
             // 
-            label4.AutoSize = true;
-            label4.BackColor = Color.White;
-            label4.Font = new Font("Calibri", 64F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.ForeColor = Color.Black;
-            label4.Location = new Point(320, 459);
-            label4.Name = "label4";
-            label4.Size = new Size(1285, 131);
-            label4.TabIndex = 6;
-            label4.Text = "(19/06/2023 - 11:23:00 PM)";
+            lb_BlockLinkedDate.AutoSize = true;
+            lb_BlockLinkedDate.BackColor = Color.White;
+            lb_BlockLinkedDate.Font = new Font("Calibri", 64F, FontStyle.Bold, GraphicsUnit.Point);
+            lb_BlockLinkedDate.ForeColor = Color.Black;
+            lb_BlockLinkedDate.Location = new Point(320, 459);
+            lb_BlockLinkedDate.Name = "lb_BlockLinkedDate";
+            lb_BlockLinkedDate.Size = new Size(1110, 131);
+            lb_BlockLinkedDate.TabIndex = 6;
+            lb_BlockLinkedDate.Text = "(19/06/2023 - 11:23:00)";
             // 
-            // label5
+            // lb_DoYouWantToContinue
             // 
-            label5.AutoSize = true;
-            label5.BackColor = Color.Blue;
-            label5.Font = new Font("Calibri", 72F, FontStyle.Bold, GraphicsUnit.Point);
-            label5.ForeColor = Color.White;
-            label5.Location = new Point(153, 668);
-            label5.Name = "label5";
-            label5.Size = new Size(1580, 146);
-            label5.TabIndex = 7;
-            label5.Text = "DO YOU WANT TO CONTINUE?";
+            lb_DoYouWantToContinue.AutoSize = true;
+            lb_DoYouWantToContinue.BackColor = Color.Blue;
+            lb_DoYouWantToContinue.Font = new Font("Calibri", 72F, FontStyle.Bold, GraphicsUnit.Point);
+            lb_DoYouWantToContinue.ForeColor = Color.White;
+            lb_DoYouWantToContinue.Location = new Point(153, 668);
+            lb_DoYouWantToContinue.Name = "lb_DoYouWantToContinue";
+            lb_DoYouWantToContinue.Size = new Size(1580, 146);
+            lb_DoYouWantToContinue.TabIndex = 7;
+            lb_DoYouWantToContinue.Text = "DO YOU WANT TO CONTINUE?";
             // 
             // Blinking_form
             // 
@@ -142,11 +142,11 @@
             BackColor = Color.Yellow;
             ClientSize = new Size(1902, 1033);
             Controls.Add(lb_EngineRepeated);
-            Controls.Add(label5);
-            Controls.Add(label4);
-            Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(lb_RepeatedEngNum);
+            Controls.Add(lb_DoYouWantToContinue);
+            Controls.Add(lb_BlockLinkedDate);
+            Controls.Add(lb_BlockLinkedValue);
+            Controls.Add(lb_BlockAlreadyLinked);
+            Controls.Add(lb_RepeatedEngNumValue);
             Controls.Add(btn_ContinueAfterTrigger);
             Controls.Add(btn_StopAfterTrigger);
             Name = "Blinking_form";
@@ -161,10 +161,10 @@
         private Button btn_StopAfterTrigger;
         private Button btn_ContinueAfterTrigger;
         private Label lb_EngineRepeated;
-        private Label lb_RepeatedEngNum;
-        private Label label2;
-        private Label label3;
-        private Label label4;
-        private Label label5;
+        private Label lb_RepeatedEngNumValue;
+        private Label lb_BlockAlreadyLinked;
+        private Label lb_BlockLinkedValue;
+        private Label lb_BlockLinkedDate;
+        private Label lb_DoYouWantToContinue;
     }
 }
