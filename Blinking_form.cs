@@ -21,6 +21,7 @@ namespace EngineNumber_checker
             InitializeComponent();
             form1 = f;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ApplicationProperties_FormClosing);
+            this.lb_RepeatedEngNum.Text = form1.CurrentEngine;
         }
 
         private void ApplicationProperties_FormClosing(object sender, FormClosingEventArgs e)
@@ -33,7 +34,6 @@ namespace EngineNumber_checker
 
         private void btn_ContinueAfterTrigger_Click(object sender, EventArgs e)
         {
-            Form1 form1 = new Form1();
             process_Handler.ResumeProcess(form1.GetProcessID("PlcStationClient"));
             form1.Log("PLC_Client Adapter process resumed!");
             form1.tb_Console.Text = "PLC_Client Adapter process resumed!" + form1.tb_Console.Text;
@@ -42,7 +42,6 @@ namespace EngineNumber_checker
 
         private void btn_StopAfterTrigger_Click(object sender, EventArgs e)
         {
-            Form1 form1 = new Form1();
             process_Handler.KillProcess("PlcStationClient");
             form1.Log("PLC_Client Adapter process killed!");
             form1.tb_Console.Text = "PLC_Client Adapter process killed!" + form1.tb_Console.Text;

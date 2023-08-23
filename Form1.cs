@@ -17,6 +17,7 @@ namespace EngineNumber_checker
         SqlDataReader reader;
         string connetionString;
         string timeOffSetForSQL = "3";
+        public string CurrentEngine = "";
 
         bool startBtn = false;
 
@@ -77,8 +78,8 @@ namespace EngineNumber_checker
                           "( BLK_NO = ' ' AND REG_DT = REPLACE(convert(date, getdate()), '-', '') )" +
                           " ORDER by ID desc ";
 
-            //connetionString = @"Data Source=localhost;Initial Catalog=HMB;User ID=sa;Password=T00lsNetPwd;Trusted_Connection=true";
-            connetionString = @"Data Source=" + form2.getConnectionString + ";Initial Catalog=HMB;User ID=EngineNumber-APP;Password=sqs";
+            connetionString = @"Data Source=localhost;Initial Catalog=HMB;User ID=sa;Password=T00lsNetPwd;Trusted_Connection=true";
+            //connetionString = @"Data Source=" + form2.getConnectionString + ";Initial Catalog=HMB;User ID=EngineNumber-APP;Password=sqs";
 
             cnn = new SqlConnection(connetionString);
             cnn.Open();
@@ -98,8 +99,6 @@ namespace EngineNumber_checker
 
         public void EngineValidate()
         {
-            string CurrentEngine = "";
-
             CurrentEngine = GetCurrentEngineBySQL();
 
             if (CurrentEngine != "")
@@ -115,8 +114,8 @@ namespace EngineNumber_checker
                 "ENG_NO = " + "'" + CurrentEngine + "'" +
                 "and (QM_CD = 'BKA00-100-01-M1' and QUALITY_DATA LIKE '%Block%')";
 
-                //connetionString = @"Data Source=localhost;Initial Catalog=HMB;User ID=sa;Password=T00lsNetPwd;Trusted_Connection=true";
-                connetionString = @"Data Source=" + form2.getConnectionString + ";Initial Catalog=HMB;User ID=EngineNumber-APP;Password=sqs";
+                connetionString = @"Data Source=localhost;Initial Catalog=HMB;User ID=sa;Password=T00lsNetPwd;Trusted_Connection=true";
+                //connetionString = @"Data Source=" + form2.getConnectionString + ";Initial Catalog=HMB;User ID=EngineNumber-APP;Password=sqs";
                 cnn = new SqlConnection(connetionString);
                 cnn.Open();
 
@@ -148,25 +147,7 @@ namespace EngineNumber_checker
                         tb_Console.Text = "=========\r\nREPEATED ENGINE DETECTED: " + CurrentEngine + "\r\n" +
                             "Block linked: " + queryResultQualityData + "\r\n=========\r\n" + tb_Console.Text;
 
-
-                        DialogResult dialogResult = MessageBox.Show("Repeated Engine: " + CurrentEngine + "\r\n" +
-                           "Block linked: " + queryResultQualityData + "\r\n\r\n" + "DO YOU WANT TO CLOSE THE TMS ADAPTER?", "DUPLICATE ENGINE", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
-                        if (dialogResult == DialogResult.Yes)
-                        {
-                            process_Handler.KillProcess("PlcStationClient");
-                            my_logger.Log("PLC_Client Adapter process killed!");
-                            tb_Console.Text = "PLC_Client Adapter process killed!" + tb_Console.Text;
-                            Timer2.Start();
-
-                        }
-
-                        else if (dialogResult == DialogResult.No)
-                        {
-                            process_Handler.ResumeProcess(GetProcessID("PlcStationClient"));
-                            my_logger.Log("PLC_Client Adapter process resumed!");
-                            tb_Console.Text = "PLC_Client Adapter process resumed!" + tb_Console.Text;
-                            Timer2.Start();
-                        }
+                        EngineDuplicate();
                     }
 
                 }
@@ -186,37 +167,35 @@ namespace EngineNumber_checker
 
         private void btn_Start_Click(object sender, EventArgs e)
         {
-            EngineDuplicate();
+            if (startBtn)
+            {
+                if (tb_Console.Text == null)
+                    pn_AtlasLogo.Show();
 
-            //if (startBtn)
-            //{
-            //    if (tb_Console.Text == null)
-            //        pn_AtlasLogo.Show();
+                btn_Start.BackColor = Color.Green;
+                btn_Start.Text = "Start";
+                startBtn = false;
+                lb_Timer_Tick.BackColor = Color.LightSlateGray;
+                pn_StopRunning.BackColor = Color.LightSlateGray;
+                lb_Timer_Tick.Text = "Stopped";
 
-            //    btn_Start.BackColor = Color.Green;
-            //    btn_Start.Text = "Start";
-            //    startBtn = false;
-            //    lb_Timer_Tick.BackColor = Color.LightSlateGray;
-            //    pn_StopRunning.BackColor = Color.LightSlateGray;
-            //    lb_Timer_Tick.Text = "Stopped";
+                Timer2.Stop();
+                my_logger.Log("EngineNumber-Checker Stopped!");
+            }
+            else
+            {
+                pn_AtlasLogo.Hide();
 
-            //    Timer2.Stop();
-            //    my_logger.Log("EngineNumber-Checker Stopped!");
-            //}
-            //else
-            //{
-            //    pn_AtlasLogo.Hide();
+                Timer2_Tick(sender, e);
 
-            //    Timer2_Tick(sender, e);
+                btn_Start.BackColor = Color.Crimson;
+                btn_Start.Text = "Stop";
+                startBtn = true;
+                lb_Timer_Tick.Text = "Running";
 
-            //    btn_Start.BackColor = Color.Crimson;
-            //    btn_Start.Text = "Stop";
-            //    startBtn = true;
-            //    lb_Timer_Tick.Text = "Running";
-
-            //    Timer2.Start();
-            //    my_logger.Log("EngineNumber-Checker Started!");
-            //}
+                Timer2.Start();
+                my_logger.Log("EngineNumber-Checker Started!");
+            }
 
 
         }
@@ -243,7 +222,7 @@ namespace EngineNumber_checker
         {
             Timer2.Interval = form2.getTimerTickMsValue;
             engineLifeTime = form2.getEngineLifeTimeMsValueInt;
-            tb_Console.Text = "SAVED";
+            tb_Console.Text = "\r\nPARAMETERS SAVED\r\n" + tb_Console.Text;
         }
 
         private void btn_Options_Click(object sender, EventArgs e)

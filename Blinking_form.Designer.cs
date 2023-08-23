@@ -31,7 +31,7 @@
             btn_StopAfterTrigger = new Button();
             btn_ContinueAfterTrigger = new Button();
             lb_EngineRepeated = new Label();
-            label1 = new Label();
+            lb_RepeatedEngNum = new Label();
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
@@ -78,17 +78,17 @@
             lb_EngineRepeated.TabIndex = 2;
             lb_EngineRepeated.Text = "ENGINE REPEATED:";
             // 
-            // label1
+            // lb_RepeatedEngNum
             // 
-            label1.AutoSize = true;
-            label1.BackColor = Color.White;
-            label1.Font = new Font("Calibri", 68F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.ForeColor = Color.Black;
-            label1.Location = new Point(762, 103);
-            label1.Name = "label1";
-            label1.Size = new Size(407, 140);
-            label1.TabIndex = 3;
-            label1.Text = "070123";
+            lb_RepeatedEngNum.AutoSize = true;
+            lb_RepeatedEngNum.BackColor = Color.White;
+            lb_RepeatedEngNum.Font = new Font("Calibri", 68F, FontStyle.Bold, GraphicsUnit.Point);
+            lb_RepeatedEngNum.ForeColor = Color.Black;
+            lb_RepeatedEngNum.Location = new Point(762, 103);
+            lb_RepeatedEngNum.Name = "lb_RepeatedEngNum";
+            lb_RepeatedEngNum.Size = new Size(407, 140);
+            lb_RepeatedEngNum.TabIndex = 3;
+            lb_RepeatedEngNum.Text = "070123";
             // 
             // label2
             // 
@@ -146,7 +146,7 @@
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
-            Controls.Add(label1);
+            Controls.Add(lb_RepeatedEngNum);
             Controls.Add(btn_ContinueAfterTrigger);
             Controls.Add(btn_StopAfterTrigger);
             Name = "Blinking_form";
@@ -161,7 +161,7 @@
         private Button btn_StopAfterTrigger;
         private Button btn_ContinueAfterTrigger;
         private Label lb_EngineRepeated;
-        private Label label1;
+        private Label lb_RepeatedEngNum;
         private Label label2;
         private Label label3;
         private Label label4;
