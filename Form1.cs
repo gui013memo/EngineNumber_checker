@@ -31,13 +31,12 @@ namespace EngineNumber_checker
         int engineLifeTime = 3;
         IntervalForm form2;
 
-
         public Form1()
         {
             blinking_Form = new Blinking_form(this);
             form2 = new IntervalForm(this);
             InitializeComponent();
-            this.TopMost = true;
+            //this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormIsClosing);
             my_logger.Log("EngineNumber-Checker app Opened!");
         }
@@ -82,8 +81,8 @@ namespace EngineNumber_checker
                           "( BLK_NO = ' ' AND REG_DT = REPLACE(convert(date, getdate()), '-', '') )" +
                           " ORDER by ID desc ";
 
-            connetionString = @"Data Source=localhost;Initial Catalog=HMB;User ID=sa;Password=T00lsNetPwd;Trusted_Connection=true";
-            //connetionString = @"Data Source=" + form2.getConnectionString + ";Initial Catalog=HMB;User ID=EngineNumber-APP;Password=sqs";
+            //connetionString = @"Data Source=localhost;Initial Catalog=HMB;User ID=sa;Password=T00lsNetPwd;Trusted_Connection=true";
+            connetionString = @"Data Source=" + form2.getConnectionString + ";Initial Catalog=HMB;User ID=EngineNumber-APP;Password=sqs";
 
             cnn = new SqlConnection(connetionString);
             cnn.Open();
@@ -120,8 +119,8 @@ namespace EngineNumber_checker
                 "ENG_NO = " + "'" + CurrentEngine + "'" +
                 "and (QM_CD = 'BKA00-100-01-M1' and QUALITY_DATA LIKE '%Block%')";
 
-                connetionString = @"Data Source=localhost;Initial Catalog=HMB;User ID=sa;Password=T00lsNetPwd;Trusted_Connection=true";
-                //connetionString = @"Data Source=" + form2.getConnectionString + ";Initial Catalog=HMB;User ID=EngineNumber-APP;Password=sqs";
+                //connetionString = @"Data Source=localhost;Initial Catalog=HMB;User ID=sa;Password=T00lsNetPwd;Trusted_Connection=true";
+                connetionString = @"Data Source=" + form2.getConnectionString + ";Initial Catalog=HMB;User ID=EngineNumber-APP;Password=sqs";
                 cnn = new SqlConnection(connetionString);
                 cnn.Open();
 
@@ -137,7 +136,7 @@ namespace EngineNumber_checker
                 if (results[0] != null)
                 {
                     string queryResultEngine = results[0].ToString();
-                    queryResultQualityData = results[1].ToString().Substring(41);
+                    queryResultQualityData = results[1].ToString().Substring(40, 13);
                     queryResultREG_DT = results[2].ToString();
                     queryResultREG_TM = results[3].ToString();
 
@@ -159,8 +158,11 @@ namespace EngineNumber_checker
                     }
 
                 }
-                else tb_Console.Text = "=====\r\nResult: OK.\r\n=====" + tb_Console.Text;
-                my_logger.Log("Result: OK.");
+                else
+                {
+                    tb_Console.Text = "=====\r\nResult: OK.\r\n=====" + tb_Console.Text;
+                    my_logger.Log("Result: OK.");
+                }
 
                 reader.Close();
                 command.Dispose();
@@ -192,6 +194,8 @@ namespace EngineNumber_checker
             }
             else
             {
+                my_logger.Log("EngineNumber-Checker Started!");
+
                 pn_AtlasLogo.Hide();
 
                 Timer2_Tick(sender, e);
@@ -202,7 +206,6 @@ namespace EngineNumber_checker
                 lb_Timer_Tick.Text = "Running";
 
                 Timer2.Start();
-                my_logger.Log("EngineNumber-Checker Started!");
             }
 
 

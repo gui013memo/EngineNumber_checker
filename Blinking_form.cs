@@ -15,6 +15,7 @@ namespace EngineNumber_checker
         Process_handler process_Handler = new Process_handler();
 
         Form1 form1;
+        Form4 form4 = new Form4();
 
         string date = "";
         string time = "";
@@ -22,6 +23,8 @@ namespace EngineNumber_checker
         public Blinking_form(Form1 f)
         {
             this.TopMost = true;
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
 
             form1 = f;
 
@@ -44,7 +47,7 @@ namespace EngineNumber_checker
             time = time.Insert(5, ":");
 
             this.lb_RepeatedEngNumValue.Text = form1.CurrentEngine;
-            this.lb_BlockLinkedValue.Text = form1.queryResultQualityData.Substring(0,13);
+            this.lb_BlockLinkedValue.Text = form1.queryResultQualityData;
             this.lb_BlockLinkedDate.Text = "(" + date + " " + time + ")";
         }
 
@@ -59,7 +62,7 @@ namespace EngineNumber_checker
         private void btn_ContinueAfterTrigger_Click(object sender, EventArgs e)
         {
             process_Handler.ResumeProcess(form1.GetProcessID("PlcStationClient"));
-            form1.Log("PLC_Client Adapter process resumed!");
+            form1.Log("PLC_Client Adapter process resumed! CONTINUE WAS HITTED");
             form1.tb_Console.Text = "PLC_Client Adapter process resumed!" + form1.tb_Console.Text;
             form1.Timer2.Start();
             this.Hide();
@@ -68,10 +71,11 @@ namespace EngineNumber_checker
         private void btn_StopAfterTrigger_Click(object sender, EventArgs e)
         {
             process_Handler.KillProcess("PlcStationClient");
-            form1.Log("PLC_Client Adapter process killed!");
+            form1.Log("PLC_Client Adapter process killed! STOP WAS HITTED");
             form1.tb_Console.Text = "PLC_Client Adapter process killed!" + form1.tb_Console.Text;
             form1.Timer2.Start();
             this.Hide();
+            form4.Show();
         }
     }
 }

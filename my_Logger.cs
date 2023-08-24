@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,10 +41,39 @@ namespace EngineNumber_checker
 
         }
 
+        public static void AddOrUpdateAppSettings(string key, string value)
+        {
+            try
+            {
+                var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                var settings = configFile.AppSettings.Settings;
+                if (settings[key] == null)
+                {
+                    settings.Add(key, value);
+                }
+                else
+                {
+                    settings[key].Value = value;
+                }
+                configFile.Save(ConfigurationSaveMode.Modified);
+                ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
+            }
+            catch (ConfigurationErrorsException)
+            {
+                Console.WriteLine("Error writing app settings");
+            }
+        }
+
+            public void CheckLogDate(DateTime date)
+        {
+            //if (date != ) { }
+        }
+
         public override void Log(string Messsage)
         {
+            //AddOrUpdateAppSettings("LastLogDate", "08-01-2022");
 
-            System.Console.WriteLine("Logged : {0}", Messsage);
+            //string test = ConfigurationManager.AppSettings["LastLogDate"];
 
             using (System.IO.StreamWriter w = System.IO.File.AppendText(this.FilePath))
             {

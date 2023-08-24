@@ -132,8 +132,7 @@
             Margin = new Padding(3, 4, 3, 4);
             Name = "Form1";
             StartPosition = FormStartPosition.Manual;
-            Text = "EngineNumber Checker";
-            TopMost = true;
+            Text = "ENGINE NUMBER CHECKER - v1.0";
             pn_StopRunning.ResumeLayout(false);
             pn_StopRunning.PerformLayout();
             ResumeLayout(false);
