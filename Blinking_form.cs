@@ -37,18 +37,9 @@ namespace EngineNumber_checker
 
         public void RefreshDataForF3()
         {
-            date = form1.queryResultREG_DT;
-            time = form1.queryResultREG_TM;
-
-            date = date.Insert(4, "/");
-            date = date.Insert(7, "/");
-
-            time = time.Insert(2, ":");
-            time = time.Insert(5, ":");
-
             this.lb_RepeatedEngNumValue.Text = form1.CurrentEngine;
             this.lb_BlockLinkedValue.Text = form1.queryResultQualityData;
-            this.lb_BlockLinkedDate.Text = "(" + date + " " + time + ")";
+            this.lb_BlockLinkedDate.Text = "(" + form1.queryResultREG_DT + " " + form1.queryResultREG_TM + ")";
         }
 
         private void ApplicationProperties_FormClosing(object sender, FormClosingEventArgs e)

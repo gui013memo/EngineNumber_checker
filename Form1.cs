@@ -117,7 +117,7 @@ namespace EngineNumber_checker
                 "FROM [HMB].[MES].[Q_QUALITY_SEND_IF]" +
                 "WHERE " +
                 "ENG_NO = " + "'" + CurrentEngine + "'" +
-                "and (QM_CD = 'BKA00-100-01-M1' and QUALITY_DATA LIKE '%Block%')";
+                "AND (QM_CD = 'BKA00-100-01-M1' AND QUALITY_DATA LIKE '%Block%')";
 
                 //connetionString = @"Data Source=localhost;Initial Catalog=HMB;User ID=sa;Password=T00lsNetPwd;Trusted_Connection=true";
                 connetionString = @"Data Source=" + form2.getConnectionString + ";Initial Catalog=HMB;User ID=EngineNumber-APP;Password=sqs";
@@ -148,11 +148,20 @@ namespace EngineNumber_checker
 
                         Timer2.Stop();
 
+                        queryResultREG_DT = queryResultREG_DT.Insert(4, "/");
+                        queryResultREG_DT = queryResultREG_DT.Insert(7, "/");
+
+                        queryResultREG_TM = queryResultREG_TM.Insert(2, ":");
+                        queryResultREG_TM = queryResultREG_TM.Insert(5, ":");
+
+
                         my_logger.Log("=========\r\nREPEATED ENGINE DETECTED: " + CurrentEngine + "\r\n" +
-                            "Block linked: " + queryResultQualityData + "\r\n=========\r\n");
+                            "Block linked: " + queryResultQualityData + "\r\n=========\r\n" + "Date: " + queryResultREG_DT + 
+                            " - " + queryResultREG_TM);
 
                         tb_Console.Text = "=========\r\nREPEATED ENGINE DETECTED: " + CurrentEngine + "\r\n" +
-                            "Block linked: " + queryResultQualityData + "\r\n=========\r\n" + tb_Console.Text;
+                            "Block linked: " + queryResultQualityData + "\r\n=========\r\n" + "Date: " + queryResultREG_DT +
+                            " - " + queryResultREG_TM + tb_Console.Text;
 
                         EngineDuplicate();
                     }
