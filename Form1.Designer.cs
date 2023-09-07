@@ -34,8 +34,8 @@
             lb_Timer_Tick = new Label();
             pn_StopRunning = new Panel();
             btn_Options = new Button();
-            tb_Console = new TextBox();
             pn_AtlasLogo = new Panel();
+            tb_Console = new TextBox();
             pn_StopRunning.SuspendLayout();
             SuspendLayout();
             // 
@@ -48,7 +48,7 @@
             btn_Start.ForeColor = SystemColors.Control;
             btn_Start.Location = new Point(0, 248);
             btn_Start.Name = "btn_Start";
-            btn_Start.Size = new Size(556, 78);
+            btn_Start.Size = new Size(587, 78);
             btn_Start.TabIndex = 1;
             btn_Start.Text = "Start ";
             btn_Start.UseVisualStyleBackColor = false;
@@ -66,7 +66,7 @@
             lb_Timer_Tick.FlatStyle = FlatStyle.Popup;
             lb_Timer_Tick.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
             lb_Timer_Tick.ForeColor = SystemColors.ButtonHighlight;
-            lb_Timer_Tick.Location = new Point(221, 10);
+            lb_Timer_Tick.Location = new Point(230, 12);
             lb_Timer_Tick.Name = "lb_Timer_Tick";
             lb_Timer_Tick.Size = new Size(114, 35);
             lb_Timer_Tick.TabIndex = 3;
@@ -80,7 +80,7 @@
             pn_StopRunning.Dock = DockStyle.Top;
             pn_StopRunning.Location = new Point(0, 0);
             pn_StopRunning.Name = "pn_StopRunning";
-            pn_StopRunning.Size = new Size(556, 66);
+            pn_StopRunning.Size = new Size(587, 66);
             pn_StopRunning.TabIndex = 5;
             // 
             // btn_Options
@@ -90,13 +90,22 @@
             btn_Options.FlatStyle = FlatStyle.Flat;
             btn_Options.Font = new Font("Segoe UI", 13F, FontStyle.Bold, GraphicsUnit.Point);
             btn_Options.ForeColor = Color.White;
-            btn_Options.Location = new Point(452, 0);
+            btn_Options.Location = new Point(483, 0);
             btn_Options.Name = "btn_Options";
             btn_Options.Size = new Size(104, 63);
             btn_Options.TabIndex = 7;
             btn_Options.Text = "Options";
             btn_Options.UseVisualStyleBackColor = false;
             btn_Options.Click += btn_Options_Click;
+            // 
+            // pn_AtlasLogo
+            // 
+            pn_AtlasLogo.BackgroundImage = Properties.Resources._4_bmp_mono_png6;
+            pn_AtlasLogo.BackgroundImageLayout = ImageLayout.Stretch;
+            pn_AtlasLogo.Location = new Point(160, 90);
+            pn_AtlasLogo.Name = "pn_AtlasLogo";
+            pn_AtlasLogo.Size = new Size(267, 128);
+            pn_AtlasLogo.TabIndex = 6;
             // 
             // tb_Console
             // 
@@ -107,24 +116,15 @@
             tb_Console.Name = "tb_Console";
             tb_Console.ReadOnly = true;
             tb_Console.ScrollBars = ScrollBars.Vertical;
-            tb_Console.Size = new Size(563, 194);
+            tb_Console.Size = new Size(587, 194);
             tb_Console.TabIndex = 0;
-            // 
-            // pn_AtlasLogo
-            // 
-            pn_AtlasLogo.BackgroundImage = Properties.Resources._4_bmp_mono_png6;
-            pn_AtlasLogo.BackgroundImageLayout = ImageLayout.Stretch;
-            pn_AtlasLogo.Location = new Point(145, 92);
-            pn_AtlasLogo.Name = "pn_AtlasLogo";
-            pn_AtlasLogo.Size = new Size(267, 128);
-            pn_AtlasLogo.TabIndex = 6;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightSlateGray;
-            ClientSize = new Size(556, 326);
+            ClientSize = new Size(587, 326);
             Controls.Add(pn_AtlasLogo);
             Controls.Add(tb_Console);
             Controls.Add(pn_StopRunning);
@@ -144,8 +144,8 @@
         private Panel pn_StopRunning;
         private Panel pn_AtlasLogo;
         private Button btn_Options;
-        public TextBox tb_Console;
         public System.Windows.Forms.Timer Timer2;
         public Button btn_Start;
+        public TextBox tb_Console;
     }
 }

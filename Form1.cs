@@ -3,6 +3,7 @@ using S7.Net;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 
 namespace EngineNumber_checker
@@ -69,6 +70,16 @@ namespace EngineNumber_checker
             return id;
         }
 
+        public string PLC_GetBlockOrHead()
+        {
+            PLC_M1.Open();
+            var bytes = PLC_M1.ReadBytes(DataType.DataBlock, 180, 1, 1);
+            string message = (Convert.ToChar(bytes[0]).ToString());
+            PLC_M1.Close();
+
+            return message;
+        }
+
         public string GetCurrentEngineBySQL()
         {
             string output = "";
@@ -107,75 +118,85 @@ namespace EngineNumber_checker
             if (CurrentEngine != "")
             {
                 tb_Console.Text = "New engine detected: " + CurrentEngine + "\r\n" + tb_Console.Text;
-                my_logger.Log("New engine detected: " + CurrentEngine);
+                my_logger.Log("\r\nNew engine detected: " + CurrentEngine + "\r\n");
 
-                string query = "SELECT TOP (1)" +
-                "[ENG_NO]" +
-                ",[QUALITY_DATA]" +
-                ",[REG_DT]" +
-                ",[REG_TM]" +
-                "FROM [HMB].[MES].[Q_QUALITY_SEND_IF]" +
-                "WHERE " +
-                "ENG_NO = " + "'" + CurrentEngine + "'" +
-                "AND (QM_CD = 'BKA00-100-01-M1' AND QUALITY_DATA LIKE '%Block%')";
-
-                //connetionString = @"Data Source=localhost;Initial Catalog=HMB;User ID=sa;Password=T00lsNetPwd;Trusted_Connection=true";
-                connetionString = @"Data Source=" + form2.getConnectionString + ";Initial Catalog=HMB;User ID=EngineNumber-APP;Password=sqs";
-                cnn = new SqlConnection(connetionString);
-                cnn.Open();
-
-                command = new SqlCommand(query, cnn);
-                reader = command.ExecuteReader();
-
-                object[] results = new object[4];
-                while (reader.Read())
+                if (PLC_GetBlockOrHead() == "B")
                 {
-                    reader.GetValues(results);
-                }
+                    my_logger.Log("\r\nIt is a BLOCK" + "\r\n");
 
-                if (results[0] != null)
-                {
-                    string queryResultEngine = results[0].ToString();
-                    queryResultQualityData = results[1].ToString().Substring(40, 13);
-                    queryResultREG_DT = results[2].ToString();
-                    queryResultREG_TM = results[3].ToString();
+                    string query = "SELECT TOP (1)" +
+               "[ENG_NO]" +
+               ",[QUALITY_DATA]" +
+               ",[REG_DT]" +
+               ",[REG_TM]" +
+               "FROM [HMB].[MES].[Q_QUALITY_SEND_IF]" +
+               "WHERE " +
+               "ENG_NO = " + "'" + CurrentEngine + "'" +
+               "AND (QM_CD = 'BKA00-100-01-M1' AND QUALITY_DATA LIKE '%OK        Barcode   OK        Block     B%')";
 
-                    if (queryResultEngine != null)
+                    //connetionString = @"Data Source=localhost;Initial Catalog=HMB;User ID=sa;Password=T00lsNetPwd;Trusted_Connection=true";
+                    connetionString = @"Data Source=" + form2.getConnectionString + ";Initial Catalog=HMB;User ID=EngineNumber-APP;Password=sqs";
+                    cnn = new SqlConnection(connetionString);
+                    cnn.Open();
+
+                    command = new SqlCommand(query, cnn);
+                    reader = command.ExecuteReader();
+
+                    object[] results = new object[4];
+                    while (reader.Read())
                     {
-                        tb_Console.Text = "Process Suspended" + tb_Console.Text;
-                        process_Handler.SuspendProcess(GetProcessID("PlcStationClient"));
-                        my_logger.Log("PLC process suspended!");
-
-                        Timer2.Stop();
-
-                        queryResultREG_DT = queryResultREG_DT.Insert(4, "/");
-                        queryResultREG_DT = queryResultREG_DT.Insert(7, "/");
-
-                        queryResultREG_TM = queryResultREG_TM.Insert(2, ":");
-                        queryResultREG_TM = queryResultREG_TM.Insert(5, ":");
-
-
-                        my_logger.Log("=========\r\nREPEATED ENGINE DETECTED: " + CurrentEngine + "\r\n" +
-                            "Block linked: " + queryResultQualityData + "\r\n=========\r\n" + "Date: " + queryResultREG_DT + 
-                            " - " + queryResultREG_TM);
-
-                        tb_Console.Text = "=========\r\nREPEATED ENGINE DETECTED: " + CurrentEngine + "\r\n" +
-                            "Block linked: " + queryResultQualityData + "\r\n=========\r\n" + "Date: " + queryResultREG_DT +
-                            " - " + queryResultREG_TM + tb_Console.Text;
-
-                        EngineDuplicate();
+                        reader.GetValues(results);
                     }
 
+                    if (results[0] != null)
+                    {
+                        string queryResultEngine = results[0].ToString();
+                        queryResultQualityData = results[1].ToString().Substring(40, 13);
+                        queryResultREG_DT = results[2].ToString();
+                        queryResultREG_TM = results[3].ToString();
+
+                        if (queryResultEngine != null)
+                        {
+                            Timer2.Stop();
+
+                            queryResultREG_DT = queryResultREG_DT.Insert(4, "/");
+                            queryResultREG_DT = queryResultREG_DT.Insert(7, "/");
+
+                            queryResultREG_TM = queryResultREG_TM.Insert(2, ":");
+                            queryResultREG_TM = queryResultREG_TM.Insert(5, ":");
+
+
+                            my_logger.Log("=========\r\nREPEATED ENGINE DETECTED: " + CurrentEngine + "\r\n" +
+                                "Block linked: " + queryResultQualityData + "\r\n=========\r\n" + "Date: " + queryResultREG_DT +
+                                " - " + queryResultREG_TM);
+
+                            tb_Console.Text = "=========\r\nREPEATED ENGINE DETECTED: " + CurrentEngine + "\r\n" +
+                                "Block linked: " + queryResultQualityData + "\r\n=========\r\n" + "Date: " + queryResultREG_DT +
+                                " - " + queryResultREG_TM + tb_Console.Text;
+
+                            tb_Console.Text = "Process Suspended" + tb_Console.Text;
+                            process_Handler.SuspendProcess(GetProcessID("PlcStationClient"));
+                            my_logger.Log("PLC process suspended!");
+
+                            EngineDuplicate();
+                        }
+
+                    }
+                    else
+                    {
+                        tb_Console.Text = "=====\r\nResult: OK.\r\n=====" + tb_Console.Text;
+                        my_logger.Log("Result: OK.");
+                    }
+
+                    reader.Close();
+                    command.Dispose();
+                    cnn.Close();
                 }
                 else
                 {
-                    tb_Console.Text = "=====\r\nResult: OK.\r\n=====" + tb_Console.Text;
-                    my_logger.Log("Result: OK.");
+                    tb_Console.Text = "\r\nit was a HEAD - Validation disregarded\r\n" + tb_Console.Text;
+                    my_logger.Log("it is a HEAD - The EngineNumber validation will be disregarded");
                 }
-
-                reader.Close();
-                command.Dispose();
-                cnn.Close();
             }
             else
             {
@@ -223,6 +244,8 @@ namespace EngineNumber_checker
         private void Timer2_Tick(object sender, EventArgs e)
         {
             //Timer2.Interval = form2.getTimerTickMsValue;
+            if (tb_Console.Text.Length > 2000)
+                tb_Console.Text = "";
 
             EngineValidate();
 
