@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ namespace EngineNumber_checker
 
     public class Logger : LogBase
     {
+        String currentLogDateString;
 
         private String CurrentDirectory
         {
@@ -35,10 +37,7 @@ namespace EngineNumber_checker
 
         public Logger()
         {
-            this.CurrentDirectory = Directory.GetCurrentDirectory();
-            this.FileName = "Log.txt";
-            this.FilePath = this.CurrentDirectory + "/" + this.FileName;
-
+            UpdateLogDate();
         }
 
         public static void AddOrUpdateAppSettings(string key, string value)
@@ -64,17 +63,17 @@ namespace EngineNumber_checker
             }
         }
 
-            public void CheckLogDate(DateTime date)
+        public void UpdateLogDate()
         {
-            //if (date != ) { }
+            currentLogDateString = DateTime.Now.Date.ToShortDateString();
+
+            this.CurrentDirectory = Directory.GetCurrentDirectory();
+            this.FileName = "Log" + currentLogDateString.Replace('/', '-') + ".txt";
+            this.FilePath = this.CurrentDirectory + "/" + this.FileName;
         }
 
         public override void Log(string Messsage)
         {
-            //AddOrUpdateAppSettings("LastLogDate", "08-01-2022");
-
-            //string test = ConfigurationManager.AppSettings["LastLogDate"];
-
             using (System.IO.StreamWriter w = System.IO.File.AppendText(this.FilePath))
             {
                 w.WriteLine("================================================");

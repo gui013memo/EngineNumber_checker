@@ -118,21 +118,21 @@ namespace EngineNumber_checker
             if (CurrentEngine != "")
             {
                 tb_Console.Text = "New engine detected: " + CurrentEngine + "\r\n" + tb_Console.Text;
-                my_logger.Log("\r\nNew engine detected: " + CurrentEngine + "\r\n");
+                my_logger.Log("New engine detected: " + CurrentEngine);
 
                 if (PLC_GetBlockOrHead() == "B")
                 {
                     my_logger.Log("\r\nIt is a BLOCK" + "\r\n");
 
                     string query = "SELECT TOP (1)" +
-               "[ENG_NO]" +
-               ",[QUALITY_DATA]" +
-               ",[REG_DT]" +
-               ",[REG_TM]" +
-               "FROM [HMB].[MES].[Q_QUALITY_SEND_IF]" +
-               "WHERE " +
-               "ENG_NO = " + "'" + CurrentEngine + "'" +
-               "AND (QM_CD = 'BKA00-100-01-M1' AND QUALITY_DATA LIKE '%OK        Barcode   OK        Block     B%')";
+                    "[ENG_NO]" +
+                    ",[QUALITY_DATA]" +
+                    ",[REG_DT]" +
+                    ",[REG_TM]" +
+                    "FROM [HMB].[MES].[Q_QUALITY_SEND_IF]" +
+                    "WHERE " +
+                    "ENG_NO = " + "'" + CurrentEngine + "'" +
+                    "AND (QM_CD = 'BKA00-100-01-M1' AND QUALITY_DATA LIKE '%OK        Barcode   OK        Block     B%')";
 
                     //connetionString = @"Data Source=localhost;Initial Catalog=HMB;User ID=sa;Password=T00lsNetPwd;Trusted_Connection=true";
                     connetionString = @"Data Source=" + form2.getConnectionString + ";Initial Catalog=HMB;User ID=EngineNumber-APP;Password=sqs";
@@ -166,8 +166,8 @@ namespace EngineNumber_checker
                             queryResultREG_TM = queryResultREG_TM.Insert(5, ":");
 
 
-                            my_logger.Log("=========\r\nREPEATED ENGINE DETECTED: " + CurrentEngine + "\r\n" +
-                                "Block linked: " + queryResultQualityData + "\r\n=========\r\n" + "Date: " + queryResultREG_DT +
+                            my_logger.Log("REPEATED ENGINE DETECTED: " + CurrentEngine + "\r\n" +
+                                "Block linked: " + queryResultQualityData + "\r\n" + "Date: " + queryResultREG_DT +
                                 " - " + queryResultREG_TM);
 
                             tb_Console.Text = "=========\r\nREPEATED ENGINE DETECTED: " + CurrentEngine + "\r\n" +
@@ -201,7 +201,6 @@ namespace EngineNumber_checker
             else
             {
                 tb_Console.Text = "SQL: No recent EngineNumber available \r\n" + tb_Console.Text;
-                my_logger.Log("SQL: No recent EngineNumber available");
             }
         }
 
@@ -243,9 +242,11 @@ namespace EngineNumber_checker
 
         private void Timer2_Tick(object sender, EventArgs e)
         {
-            //Timer2.Interval = form2.getTimerTickMsValue;
-            if (tb_Console.Text.Length > 2000)
+            if (tb_Console.Text.Length > 1000)
+            {
                 tb_Console.Text = "";
+                my_logger.Log("SQL: No recent EngineNumber available TICK");
+            }
 
             EngineValidate();
 
