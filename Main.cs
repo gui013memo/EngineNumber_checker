@@ -220,6 +220,13 @@ namespace EngineNumber_checker
             }
         }
 
+
+        private void btn_Options_Click(object sender, EventArgs e)
+        {
+            options.Show();
+        }
+
+
         private void Timer2_Tick(object sender, EventArgs e)
         {
             if (Tb_Console.Text.Length > 300)
@@ -247,11 +254,6 @@ namespace EngineNumber_checker
             Timer2.Interval = options.GetTimerTickMsValue;
             engineLifeTime = options.GetEngineLifeTimeMsValueInt;
             Tb_Console.Text = "\r\nPARAMETERS SAVED\r\n" + Tb_Console.Text;
-        }
-
-        private void btn_Options_Click(object sender, EventArgs e)
-        {
-            options.Show();
         }
     }
 }

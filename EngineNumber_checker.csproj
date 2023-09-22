@@ -40,10 +40,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="shield_77956.ico" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="C:\Users\a00542721\OneDrive - ONEVIRTUALOFFICE\Desktop\EngineNumber-checker-bkp\.editorconfig" />
   </ItemGroup>
 
