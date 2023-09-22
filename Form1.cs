@@ -37,9 +37,9 @@ namespace EngineNumber_checker
             blinking_Form = new Blinking_form(this);
             form2 = new IntervalForm(this);
             InitializeComponent();
-            //this.TopMost = true;
+            btn_Start.PerformClick();
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormIsClosing);
-            my_logger.Log("EngineNumber-Checker app Opened!");
+            btn_Start_Click(new object(), new EventArgs());
         }
 
         private void FormIsClosing(object sender, FormClosingEventArgs e)
@@ -92,8 +92,8 @@ namespace EngineNumber_checker
                           "( BLK_NO = ' ' AND REG_DT = REPLACE(convert(date, getdate()), '-', '') )" +
                           " ORDER by ID desc ";
 
-            //connetionString = @"Data Source=localhost;Initial Catalog=HMB;User ID=sa;Password=T00lsNetPwd;Trusted_Connection=true";
-            connetionString = @"Data Source=" + form2.getConnectionString + ";Initial Catalog=HMB;User ID=EngineNumber-APP;Password=sqs";
+            connetionString = @"Data Source=localhost;Initial Catalog=HMB;User ID=sa;Password=T00lsNetPwd;Trusted_Connection=true";
+            //connetionString = @"Data Source=" + form2.getConnectionString + ";Initial Catalog=HMB;User ID=EngineNumber-APP;Password=sqs";
 
             cnn = new SqlConnection(connetionString);
             cnn.Open();
@@ -134,8 +134,8 @@ namespace EngineNumber_checker
                     "ENG_NO = " + "'" + CurrentEngine + "'" +
                     "AND (QM_CD = 'BKA00-100-01-M1' AND QUALITY_DATA LIKE '%OK        Barcode   OK        Block     B%')";
 
-                    //connetionString = @"Data Source=localhost;Initial Catalog=HMB;User ID=sa;Password=T00lsNetPwd;Trusted_Connection=true";
-                    connetionString = @"Data Source=" + form2.getConnectionString + ";Initial Catalog=HMB;User ID=EngineNumber-APP;Password=sqs";
+                    connetionString = @"Data Source=localhost;Initial Catalog=HMB;User ID=sa;Password=T00lsNetPwd;Trusted_Connection=true";
+                    //connetionString = @"Data Source=" + form2.getConnectionString + ";Initial Catalog=HMB;User ID=EngineNumber-APP;Password=sqs";
                     cnn = new SqlConnection(connetionString);
                     cnn.Open();
 
@@ -235,6 +235,7 @@ namespace EngineNumber_checker
                 lb_Timer_Tick.Text = "Running";
 
                 Timer2.Start();
+
             }
 
 
@@ -242,7 +243,7 @@ namespace EngineNumber_checker
 
         private void Timer2_Tick(object sender, EventArgs e)
         {
-            if (tb_Console.Text.Length > 1000)
+            if (tb_Console.Text.Length > 300)
             {
                 tb_Console.Text = "";
                 my_logger.Log("SQL: No recent EngineNumber available TICK");

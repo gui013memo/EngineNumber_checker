@@ -67,16 +67,19 @@ namespace EngineNumber_checker
         {
             currentLogDateString = DateTime.Now.Date.ToShortDateString();
 
-            this.CurrentDirectory = Directory.GetCurrentDirectory();
+            System.IO.Directory.CreateDirectory("C:\\ProgramData\\ApplicationLogs\\EngineNumberChecker");
+
+            this.CurrentDirectory = "C:\\ProgramData\\ApplicationLogs\\EngineNumberChecker";
             this.FileName = "Log" + currentLogDateString.Replace('/', '-') + ".txt";
             this.FilePath = this.CurrentDirectory + "/" + this.FileName;
         }
 
         public override void Log(string Messsage)
         {
+            UpdateLogDate();
+
             using (System.IO.StreamWriter w = System.IO.File.AppendText(this.FilePath))
             {
-                w.WriteLine("================================================");
                 w.Write("\r\nLog Entry : ");
                 w.WriteLine("{0} {1}", DateTime.Now.ToLongTimeString(), DateTime.Now.ToLongDateString());
                 w.WriteLine("  :{0}", Messsage);

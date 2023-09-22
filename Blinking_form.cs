@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -31,8 +32,6 @@ namespace EngineNumber_checker
             InitializeComponent();
 
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ApplicationProperties_FormClosing);
-
-
         }
 
         public void RefreshDataForF3()
@@ -66,7 +65,13 @@ namespace EngineNumber_checker
             form1.tb_Console.Text = "PLC_Client Adapter process killed!" + form1.tb_Console.Text;
             form1.Timer2.Start();
             this.Hide();
-            form4.Show();
+            //form4.Show();
+
+            Process yourProcess = new Process();
+            yourProcess.StartInfo.FileName = @"C:\SW\SQS Client\ACA\App\PlcStationClient.exe";
+
+            yourProcess.Start();
+
         }
     }
 }

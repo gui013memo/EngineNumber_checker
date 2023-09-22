@@ -6,6 +6,8 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>shield_77956.ico</ApplicationIcon>
+    <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,6 +28,18 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\a00542721\OneDrive - ONEVIRTUALOFFICE\Desktop\EngineNumber-checker-bkp\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="shield_77956.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\a00542721\OneDrive - ONEVIRTUALOFFICE\Desktop\EngineNumber-checker-bkp\.editorconfig" />
   </ItemGroup>
 
 </Project>

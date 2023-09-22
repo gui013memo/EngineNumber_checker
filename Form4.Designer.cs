@@ -38,11 +38,11 @@
             lb_EngineRepeated.Anchor = AnchorStyles.Top;
             lb_EngineRepeated.AutoSize = true;
             lb_EngineRepeated.Font = new Font("Calibri", 68F, FontStyle.Bold, GraphicsUnit.Point);
-            lb_EngineRepeated.Location = new Point(511, -15);
+            lb_EngineRepeated.Location = new Point(764, -3);
             lb_EngineRepeated.Name = "lb_EngineRepeated";
-            lb_EngineRepeated.Size = new Size(835, 140);
+            lb_EngineRepeated.Size = new Size(367, 140);
             lb_EngineRepeated.TabIndex = 3;
-            lb_EngineRepeated.Text = "PLEASE RESTART";
+            lb_EngineRepeated.Text = "CHECK";
             // 
             // label1
             // 
@@ -51,7 +51,7 @@
             label1.Font = new Font("Calibri", 68F, FontStyle.Bold, GraphicsUnit.Point);
             label1.Location = new Point(157, 112);
             label1.Name = "label1";
-            label1.Size = new Size(1536, 140);
+            label1.Size = new Size(1532, 140);
             label1.TabIndex = 4;
             label1.Text = "the PLC_Station_Client adapter";
             // 

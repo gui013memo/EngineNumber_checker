@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             btn_Start = new Button();
             Timer2 = new System.Windows.Forms.Timer(components);
             lb_Timer_Tick = new Label();
@@ -129,10 +130,11 @@
             Controls.Add(tb_Console);
             Controls.Add(pn_StopRunning);
             Controls.Add(btn_Start);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 4, 3, 4);
             Name = "Form1";
             StartPosition = FormStartPosition.Manual;
-            Text = "ENGINE NUMBER CHECKER - v1.0";
+            Text = "Atlas Copco - EngineNumber checker";
             pn_StopRunning.ResumeLayout(false);
             pn_StopRunning.PerformLayout();
             ResumeLayout(false);
