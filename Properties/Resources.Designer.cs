@@ -63,79 +63,9 @@ namespace EngineNumber_checker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _4_bmp_mono_png {
-            get {
-                object obj = ResourceManager.GetObject("4-bmp-mono-png", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap _4_bmp_mono_png_2 {
-            get {
-                object obj = ResourceManager.GetObject("4-bmp-mono-png-2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap _4_bmp_mono_png1 {
-            get {
-                object obj = ResourceManager.GetObject("4-bmp-mono-png1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap _4_bmp_mono_png2 {
-            get {
-                object obj = ResourceManager.GetObject("4-bmp-mono-png2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap _4_bmp_mono_png3 {
-            get {
-                object obj = ResourceManager.GetObject("4-bmp-mono-png3", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap _4_bmp_mono_png4 {
-            get {
-                object obj = ResourceManager.GetObject("4-bmp-mono-png4", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap _4_bmp_mono_png5 {
-            get {
-                object obj = ResourceManager.GetObject("4-bmp-mono-png5", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap _4_bmp_mono_png6 {
             get {
-                object obj = ResourceManager.GetObject("4-bmp-mono-png6", resourceCulture);
+                object obj = ResourceManager.GetObject("_4-bmp-mono-png6", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -176,16 +106,6 @@ namespace EngineNumber_checker.Properties {
         internal static System.Drawing.Bitmap Sem_título {
             get {
                 object obj = ResourceManager.GetObject("Sem título", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Shield_White {
-            get {
-                object obj = ResourceManager.GetObject("Shield-White", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
