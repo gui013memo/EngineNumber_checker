@@ -19,8 +19,8 @@ namespace EngineNumber_checker
         Main main;
         Form4 form4 = new Form4();
 
-        string date = "";
-        string time = "";
+        string date = string.Empty;
+        string time = string.Empty;
 
         public DuplicateDetected(Main main, Process_handler process_Handler, Logger logger)
         {

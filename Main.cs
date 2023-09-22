@@ -18,10 +18,10 @@ namespace EngineNumber_checker
 
         string connetionString;
         string timeOffSetForSQL = "3";
-        public string CurrentEngine = "";
-        public string queryResultQualityData = "";
-        public string queryResultREG_TM = "";
-        public string queryResultREG_DT = "";
+        public string CurrentEngine = string.Empty;
+        public string queryResultQualityData = string.Empty;
+        public string queryResultREG_TM = string.Empty;
+        public string queryResultREG_DT = string.Empty;
 
         int engineLifeTime = 3;
 
@@ -68,7 +68,7 @@ namespace EngineNumber_checker
 
         public string GetCurrentEngineBySQL()
         {
-            string output = "";
+            string output = string.Empty;
 
             string query = " SELECT TOP (1) " +
                           " [ENG_SN]" +
@@ -101,7 +101,7 @@ namespace EngineNumber_checker
         {
             CurrentEngine = GetCurrentEngineBySQL();
 
-            if (CurrentEngine != "")
+            if (CurrentEngine != string.Empty)
             {
                 tb_Console.Text = "New engine detected: " + CurrentEngine + "\r\n" + tb_Console.Text;
                 logger.Log("New engine detected: " + CurrentEngine);
@@ -231,7 +231,7 @@ namespace EngineNumber_checker
         {
             if (tb_Console.Text.Length > 300)
             {
-                tb_Console.Text = "";
+                tb_Console.Text = string.Empty;
                 logger.Log("SQL: No recent EngineNumber available TICK");
             }
 

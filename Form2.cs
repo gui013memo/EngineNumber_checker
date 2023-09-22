@@ -19,7 +19,7 @@ namespace EngineNumber_checker
         int engineLifeTimeMsValue = 3;
         int engineLifeTimeSaved = 3;
         string connectionString = "172.16.0.1";
-        string connectionStringSaved = "";
+        string connectionStringSaved = string.Empty;
 
         Main main;
         public IntervalForm(Main main)
