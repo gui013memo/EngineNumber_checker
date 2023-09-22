@@ -191,7 +191,7 @@
             Controls.Add(btn_UpTimeTick);
             Name = "IntervalForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Interval";
+            Text = "Options";
             ResumeLayout(false);
             PerformLayout();
         }

@@ -25,7 +25,7 @@ namespace EngineNumber_checker
         public IntervalForm(Main main)
         {
             InitializeComponent();
-            main = main;
+            this.main = main;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ApplicationProperties_FormClosing);
         }
 
