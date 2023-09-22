@@ -30,30 +30,30 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            btn_Start = new Button();
+            Btn_Start = new Button();
             Timer2 = new System.Windows.Forms.Timer(components);
             lb_Timer_Tick = new Label();
-            pn_StopRunning = new Panel();
-            btn_Options = new Button();
-            pn_AtlasLogo = new Panel();
-            tb_Console = new TextBox();
-            pn_StopRunning.SuspendLayout();
+            Pn_StopRunning = new Panel();
+            Btn_Options = new Button();
+            Pn_AtlasLogo = new Panel();
+            Tb_Console = new TextBox();
+            Pn_StopRunning.SuspendLayout();
             SuspendLayout();
             // 
-            // btn_Start
+            // Btn_Start
             // 
-            btn_Start.BackColor = Color.Green;
-            btn_Start.Dock = DockStyle.Bottom;
-            btn_Start.FlatStyle = FlatStyle.Flat;
-            btn_Start.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_Start.ForeColor = SystemColors.Control;
-            btn_Start.Location = new Point(0, 248);
-            btn_Start.Name = "btn_Start";
-            btn_Start.Size = new Size(587, 78);
-            btn_Start.TabIndex = 1;
-            btn_Start.Text = "Start ";
-            btn_Start.UseVisualStyleBackColor = false;
-            btn_Start.Click += btn_Start_Click;
+            Btn_Start.BackColor = Color.Green;
+            Btn_Start.Dock = DockStyle.Bottom;
+            Btn_Start.FlatStyle = FlatStyle.Flat;
+            Btn_Start.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point);
+            Btn_Start.ForeColor = SystemColors.Control;
+            Btn_Start.Location = new Point(0, 248);
+            Btn_Start.Name = "Btn_Start";
+            Btn_Start.Size = new Size(587, 78);
+            Btn_Start.TabIndex = 1;
+            Btn_Start.Text = "Start ";
+            Btn_Start.UseVisualStyleBackColor = false;
+            Btn_Start.Click += Btn_Start_Click;
             // 
             // Timer2
             // 
@@ -73,81 +73,81 @@
             lb_Timer_Tick.TabIndex = 3;
             lb_Timer_Tick.Text = "Stopped";
             // 
-            // pn_StopRunning
+            // Pn_StopRunning
             // 
-            pn_StopRunning.BackColor = Color.LightSlateGray;
-            pn_StopRunning.Controls.Add(btn_Options);
-            pn_StopRunning.Controls.Add(lb_Timer_Tick);
-            pn_StopRunning.Dock = DockStyle.Top;
-            pn_StopRunning.Location = new Point(0, 0);
-            pn_StopRunning.Name = "pn_StopRunning";
-            pn_StopRunning.Size = new Size(587, 66);
-            pn_StopRunning.TabIndex = 5;
+            Pn_StopRunning.BackColor = Color.LightSlateGray;
+            Pn_StopRunning.Controls.Add(Btn_Options);
+            Pn_StopRunning.Controls.Add(lb_Timer_Tick);
+            Pn_StopRunning.Dock = DockStyle.Top;
+            Pn_StopRunning.Location = new Point(0, 0);
+            Pn_StopRunning.Name = "Pn_StopRunning";
+            Pn_StopRunning.Size = new Size(587, 66);
+            Pn_StopRunning.TabIndex = 5;
             // 
-            // btn_Options
+            // Btn_Options
             // 
-            btn_Options.BackColor = Color.SlateGray;
-            btn_Options.FlatAppearance.BorderSize = 0;
-            btn_Options.FlatStyle = FlatStyle.Flat;
-            btn_Options.Font = new Font("Segoe UI", 13F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_Options.ForeColor = Color.White;
-            btn_Options.Location = new Point(483, 0);
-            btn_Options.Name = "btn_Options";
-            btn_Options.Size = new Size(104, 63);
-            btn_Options.TabIndex = 7;
-            btn_Options.Text = "Options";
-            btn_Options.UseVisualStyleBackColor = false;
-            btn_Options.Click += btn_Options_Click;
+            Btn_Options.BackColor = Color.SlateGray;
+            Btn_Options.FlatAppearance.BorderSize = 0;
+            Btn_Options.FlatStyle = FlatStyle.Flat;
+            Btn_Options.Font = new Font("Segoe UI", 13F, FontStyle.Bold, GraphicsUnit.Point);
+            Btn_Options.ForeColor = Color.White;
+            Btn_Options.Location = new Point(483, 0);
+            Btn_Options.Name = "Btn_Options";
+            Btn_Options.Size = new Size(104, 63);
+            Btn_Options.TabIndex = 7;
+            Btn_Options.Text = "Options";
+            Btn_Options.UseVisualStyleBackColor = false;
+            Btn_Options.Click += btn_Options_Click;
             // 
-            // pn_AtlasLogo
+            // Pn_AtlasLogo
             // 
-            pn_AtlasLogo.BackgroundImage = Properties.Resources._4_bmp_mono_png6;
-            pn_AtlasLogo.BackgroundImageLayout = ImageLayout.Stretch;
-            pn_AtlasLogo.Location = new Point(160, 90);
-            pn_AtlasLogo.Name = "pn_AtlasLogo";
-            pn_AtlasLogo.Size = new Size(267, 128);
-            pn_AtlasLogo.TabIndex = 6;
+            Pn_AtlasLogo.BackgroundImage = Properties.Resources._4_bmp_mono_png6;
+            Pn_AtlasLogo.BackgroundImageLayout = ImageLayout.Stretch;
+            Pn_AtlasLogo.Location = new Point(160, 90);
+            Pn_AtlasLogo.Name = "Pn_AtlasLogo";
+            Pn_AtlasLogo.Size = new Size(267, 128);
+            Pn_AtlasLogo.TabIndex = 6;
             // 
-            // tb_Console
+            // Tb_Console
             // 
-            tb_Console.BackColor = Color.White;
-            tb_Console.Location = new Point(0, 62);
-            tb_Console.Margin = new Padding(3, 4, 3, 4);
-            tb_Console.Multiline = true;
-            tb_Console.Name = "tb_Console";
-            tb_Console.ReadOnly = true;
-            tb_Console.ScrollBars = ScrollBars.Vertical;
-            tb_Console.Size = new Size(587, 194);
-            tb_Console.TabIndex = 0;
+            Tb_Console.BackColor = Color.White;
+            Tb_Console.Location = new Point(0, 62);
+            Tb_Console.Margin = new Padding(3, 4, 3, 4);
+            Tb_Console.Multiline = true;
+            Tb_Console.Name = "Tb_Console";
+            Tb_Console.ReadOnly = true;
+            Tb_Console.ScrollBars = ScrollBars.Vertical;
+            Tb_Console.Size = new Size(587, 194);
+            Tb_Console.TabIndex = 0;
             // 
-            // main
+            // Main
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightSlateGray;
             ClientSize = new Size(587, 326);
-            Controls.Add(pn_AtlasLogo);
-            Controls.Add(tb_Console);
-            Controls.Add(pn_StopRunning);
-            Controls.Add(btn_Start);
+            Controls.Add(Pn_AtlasLogo);
+            Controls.Add(Tb_Console);
+            Controls.Add(Pn_StopRunning);
+            Controls.Add(Btn_Start);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 4, 3, 4);
-            Name = "main";
+            Name = "Main";
             StartPosition = FormStartPosition.Manual;
             Text = "Atlas Copco - EngineNumber checker";
-            pn_StopRunning.ResumeLayout(false);
-            pn_StopRunning.PerformLayout();
+            Pn_StopRunning.ResumeLayout(false);
+            Pn_StopRunning.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
         private Label lb_Timer_Tick;
-        private Panel pn_StopRunning;
-        private Panel pn_AtlasLogo;
-        private Button btn_Options;
+        private Panel Pn_StopRunning;
+        private Panel Pn_AtlasLogo;
+        private Button Btn_Options;
         public System.Windows.Forms.Timer Timer2;
-        public Button btn_Start;
-        public TextBox tb_Console;
+        public Button Btn_Start;
+        public TextBox Tb_Console;
     }
 }

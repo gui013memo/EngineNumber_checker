@@ -1,6 +1,6 @@
 ﻿namespace EngineNumber_checker
 {
-    partial class IntervalForm
+    partial class Options
     {
         /// <summary>
         /// Required designer variable.
@@ -51,7 +51,7 @@
             btn_UpTimeTick.Size = new Size(243, 101);
             btn_UpTimeTick.TabIndex = 1;
             btn_UpTimeTick.UseVisualStyleBackColor = true;
-            btn_UpTimeTick.Click += btn_UpTimeTick_Click;
+            btn_UpTimeTick.Click += btn_UpTimerTick_Click;
             // 
             // btn_DownTimerTick
             // 
@@ -172,7 +172,7 @@
             label2.TabIndex = 13;
             label2.Text = "Engine Lifetime";
             // 
-            // IntervalForm
+            // Options
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -189,7 +189,7 @@
             Controls.Add(btn_Save);
             Controls.Add(btn_DownTimerTick);
             Controls.Add(btn_UpTimeTick);
-            Name = "IntervalForm";
+            Name = "Options";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Options";
             ResumeLayout(false);

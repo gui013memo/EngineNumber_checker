@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace EngineNumber_checker
 {
-    public partial class IntervalForm : Form
+    public partial class Options : Form
     {
 
         int timerTickMsValue = 1000;
@@ -22,16 +22,14 @@ namespace EngineNumber_checker
         string connectionStringSaved = string.Empty;
 
         Main main;
-        public IntervalForm(Main main)
+        public Options(Main main)
         {
             InitializeComponent();
             this.main = main;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ApplicationProperties_FormClosing);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormIsClosing);
         }
 
-        private Main mainForm = null;
-
-        private void ApplicationProperties_FormClosing(object sender, FormClosingEventArgs e)
+        private void FormIsClosing(object sender, FormClosingEventArgs e)
         {
             tb_TimerTickValue.Text = timerTickMsValueSaved.ToString() + "ms";
             tb_EngineLifeTimeValue.Text = engineLifeTimeSaved.ToString() + " Sec";
@@ -46,7 +44,7 @@ namespace EngineNumber_checker
             e.Cancel = true; //hides the form, cancels closing event
         }
 
-        private void btn_UpTimeTick_Click(object sender, EventArgs e)
+        private void btn_UpTimerTick_Click(object sender, EventArgs e)
         {
             if (timerTickMsValue < 4000)
             {
@@ -101,21 +99,21 @@ namespace EngineNumber_checker
             connectionStringSaved = tb_ConnectionString.Text;
         }
 
-        public int getTimerTickMsValue
+        public int GetTimerTickMsValue
         {
             get { return timerTickMsValue; }
         }
-        public string getEngineLifeTimeMsValue
+        public string GetEngineLifeTimeMsValue
         {
             get { return engineLifeTimeMsValue.ToString(); }
         }
 
-        public int getEngineLifeTimeMsValueInt
+        public int GetEngineLifeTimeMsValueInt
         {
             get { return engineLifeTimeMsValue; }
         }
 
-        public string getConnectionString
+        public string GetConnectionString
         {
             get { return tb_ConnectionString.Text; }
         }

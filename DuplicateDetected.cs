@@ -17,10 +17,6 @@ namespace EngineNumber_checker
         Logger logger;
 
         Main main;
-        Form4 form4 = new Form4();
-
-        string date = string.Empty;
-        string time = string.Empty;
 
         public DuplicateDetected(Main main, Process_handler process_Handler, Logger logger)
         {
@@ -56,7 +52,7 @@ namespace EngineNumber_checker
         {
             process_Handler.ResumeProcess(process_Handler.GetProcessID("PlcStationClient"));
             logger.Log("PLC_Client Adapter process resumed! CONTINUE WAS HITTED");
-            main.tb_Console.Text = "PLC_Client Adapter process resumed!" + main.tb_Console.Text;
+            main.Tb_Console.Text = "PLC_Client Adapter process resumed!" + main.Tb_Console.Text;
             main.Timer2.Start();
             this.Hide();
         }
@@ -65,7 +61,7 @@ namespace EngineNumber_checker
         {
             process_Handler.KillProcess("PlcStationClient");
             logger.Log("PLC_Client Adapter process killed! STOP WAS HITTED");
-            main.tb_Console.Text = "PLC_Client Adapter process killed!" + main.tb_Console.Text;
+            main.Tb_Console.Text = "PLC_Client Adapter process killed!" + main.Tb_Console.Text;
             main.Timer2.Start();
             this.Hide();
             //form4.Show();

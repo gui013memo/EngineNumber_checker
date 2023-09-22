@@ -16,8 +16,9 @@ namespace EngineNumber_checker
         SqlCommand command;
         SqlDataReader reader;
 
-        string connetionString;
-        string timeOffSetForSQL = "3";
+        string connetionString = @"Data Source=localhost;Initial Catalog=HMB;User ID=sa;Password=T00lsNetPwd;Trusted_Connection=true";
+        //connetionString = @"Data Source=" + options.getConnectionString + ";Initial Catalog=HMB;User ID=EngineNumber-APP;Password=sqs";
+
         public string CurrentEngine = string.Empty;
         public string queryResultQualityData = string.Empty;
         public string queryResultREG_TM = string.Empty;
@@ -30,17 +31,17 @@ namespace EngineNumber_checker
         Plc PLC_M1 = new Plc(CpuType.S7300, "140.100.101.1", 0, 2);
 
         DuplicateDetected duplicateDetectedForm;
-        IntervalForm form2;
+        Options options;
 
         public Main()
         {
             duplicateDetectedForm = new DuplicateDetected(this, process_Handler, logger);
-            form2 = new IntervalForm(this);
+            options = new Options(this);
 
             InitializeComponent();
 
-            btn_Start.PerformClick();                       //This causes the application to open
-            btn_Start_Click(new object(), new EventArgs()); //and start running immediately.
+            Btn_Start.PerformClick();                       //This causes the application to open
+            Btn_Start_Click(new object(), new EventArgs()); //and start running immediately.
 
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormIsClosing);
         }
@@ -73,13 +74,10 @@ namespace EngineNumber_checker
             string query = " SELECT TOP (1) " +
                           " [ENG_SN]" +
                           " FROM [HMB].[SQS].[ENG_BUILD_DATA]" + " WHERE " +
-                          " ( REG_TM > REPLACE(convert(time(0), getdate()), ':', '') - " + form2.getEngineLifeTimeMsValue +
+                          " ( REG_TM > REPLACE(convert(time(0), getdate()), ':', '') - " + options.GetEngineLifeTimeMsValue +
                           " AND " + "REG_TM < REPLACE(convert(time(0), getdate()), ':', '') )" + " AND " +
                           "( BLK_NO = ' ' AND REG_DT = REPLACE(convert(date, getdate()), '-', '') )" +
                           " ORDER by ID desc ";
-
-            connetionString = @"Data Source=localhost;Initial Catalog=HMB;User ID=sa;Password=T00lsNetPwd;Trusted_Connection=true";
-            //connetionString = @"Data Source=" + form2.getConnectionString + ";Initial Catalog=HMB;User ID=EngineNumber-APP;Password=sqs";
 
             cnn = new SqlConnection(connetionString);
             cnn.Open();
@@ -97,13 +95,13 @@ namespace EngineNumber_checker
             return output;
         }
 
-        public void EngineValidate()
+        public void EngineValidation()
         {
             CurrentEngine = GetCurrentEngineBySQL();
 
             if (CurrentEngine != string.Empty)
             {
-                tb_Console.Text = "New engine detected: " + CurrentEngine + "\r\n" + tb_Console.Text;
+                Tb_Console.Text = "New engine detected: " + CurrentEngine + "\r\n" + Tb_Console.Text;
                 logger.Log("New engine detected: " + CurrentEngine);
 
                 if (PLC_GetBlockOrHead() == "B")
@@ -120,8 +118,6 @@ namespace EngineNumber_checker
                     "ENG_NO = " + "'" + CurrentEngine + "'" +
                     "AND (QM_CD = 'BKA00-100-01-M1' AND QUALITY_DATA LIKE '%OK        Barcode   OK        Block     B%')";
 
-                    connetionString = @"Data Source=localhost;Initial Catalog=HMB;User ID=sa;Password=T00lsNetPwd;Trusted_Connection=true";
-                    //connetionString = @"Data Source=" + form2.getConnectionString + ";Initial Catalog=HMB;User ID=EngineNumber-APP;Password=sqs";
                     cnn = new SqlConnection(connetionString);
                     cnn.Open();
 
@@ -156,11 +152,11 @@ namespace EngineNumber_checker
                                 "Block linked: " + queryResultQualityData + "\r\n" + "Date: " + queryResultREG_DT +
                                 " - " + queryResultREG_TM);
 
-                            tb_Console.Text = "=========\r\nREPEATED ENGINE DETECTED: " + CurrentEngine + "\r\n" +
+                            Tb_Console.Text = "=========\r\nREPEATED ENGINE DETECTED: " + CurrentEngine + "\r\n" +
                                 "Block linked: " + queryResultQualityData + "\r\n=========\r\n" + "Date: " + queryResultREG_DT +
-                                " - " + queryResultREG_TM + tb_Console.Text;
+                                " - " + queryResultREG_TM + Tb_Console.Text;
 
-                            tb_Console.Text = "Process Suspended" + tb_Console.Text;
+                            Tb_Console.Text = "Process Suspended" + Tb_Console.Text;
                             //process_Handler.SuspendProcess(GetProcessID("PlcStationClient"));
                             logger.Log("PLC process suspended!");
 
@@ -170,7 +166,7 @@ namespace EngineNumber_checker
                     }
                     else
                     {
-                        tb_Console.Text = "=====\r\nResult: OK.\r\n=====" + tb_Console.Text;
+                        Tb_Console.Text = "=====\r\nResult: OK.\r\n=====" + Tb_Console.Text;
                         logger.Log("Result: OK.");
                     }
 
@@ -180,28 +176,28 @@ namespace EngineNumber_checker
                 }
                 else
                 {
-                    tb_Console.Text = "\r\nit was a HEAD - Validation disregarded\r\n" + tb_Console.Text;
+                    Tb_Console.Text = "\r\nit was a HEAD - Validation disregarded\r\n" + Tb_Console.Text;
                     logger.Log("it is a HEAD - The EngineNumber validation will be disregarded");
                 }
             }
             else
             {
-                tb_Console.Text = "SQL: No recent EngineNumber available \r\n" + tb_Console.Text;
+                Tb_Console.Text = "SQL: No recent EngineNumber available \r\n" + Tb_Console.Text;
             }
         }
 
-        private void btn_Start_Click(object sender, EventArgs e)
+        private void Btn_Start_Click(object sender, EventArgs e)
         {
             if (startBtn)
             {
-                if (tb_Console.Text == null)
-                    pn_AtlasLogo.Show();
+                if (Tb_Console.Text == null)
+                    Pn_AtlasLogo.Show();
 
-                btn_Start.BackColor = Color.Green;
-                btn_Start.Text = "Start";
+                Btn_Start.BackColor = Color.Green;
+                Btn_Start.Text = "Start";
                 startBtn = false;
                 lb_Timer_Tick.BackColor = Color.LightSlateGray;
-                pn_StopRunning.BackColor = Color.LightSlateGray;
+                Pn_StopRunning.BackColor = Color.LightSlateGray;
                 lb_Timer_Tick.Text = "Stopped";
 
                 Timer2.Stop();
@@ -211,54 +207,51 @@ namespace EngineNumber_checker
             {
                 logger.Log("EngineNumber-Checker Started!");
 
-                pn_AtlasLogo.Hide();
+                Pn_AtlasLogo.Hide();
 
                 Timer2_Tick(sender, e);
 
-                btn_Start.BackColor = Color.Crimson;
-                btn_Start.Text = "Stop";
+                Btn_Start.BackColor = Color.Crimson;
+                Btn_Start.Text = "Stop";
                 startBtn = true;
                 lb_Timer_Tick.Text = "Running";
 
                 Timer2.Start();
-
             }
-
-
         }
 
         private void Timer2_Tick(object sender, EventArgs e)
         {
-            if (tb_Console.Text.Length > 300)
+            if (Tb_Console.Text.Length > 300)
             {
-                tb_Console.Text = string.Empty;
+                Tb_Console.Text = string.Empty;
                 logger.Log("SQL: No recent EngineNumber available TICK");
             }
 
-            EngineValidate();
+            EngineValidation();
 
             if (lb_Timer_Tick.BackColor == Color.LightSlateGray)
             {
                 lb_Timer_Tick.BackColor = Color.Gold;
-                pn_StopRunning.BackColor = Color.Gold;
+                Pn_StopRunning.BackColor = Color.Gold;
             }
             else
             {
                 lb_Timer_Tick.BackColor = Color.LightSlateGray;
-                pn_StopRunning.BackColor = Color.LightSlateGray;
+                Pn_StopRunning.BackColor = Color.LightSlateGray;
             }
         }
 
         public void SaveParameters()
         {
-            Timer2.Interval = form2.getTimerTickMsValue;
-            engineLifeTime = form2.getEngineLifeTimeMsValueInt;
-            tb_Console.Text = "\r\nPARAMETERS SAVED\r\n" + tb_Console.Text;
+            Timer2.Interval = options.GetTimerTickMsValue;
+            engineLifeTime = options.GetEngineLifeTimeMsValueInt;
+            Tb_Console.Text = "\r\nPARAMETERS SAVED\r\n" + Tb_Console.Text;
         }
 
         private void btn_Options_Click(object sender, EventArgs e)
         {
-            form2.Show();
+            options.Show();
         }
     }
 }

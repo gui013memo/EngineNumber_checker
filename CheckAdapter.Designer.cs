@@ -1,6 +1,6 @@
 ﻿namespace EngineNumber_checker
 {
-    partial class Form4
+    partial class CheckAdapter
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@
         {
             lb_EngineRepeated = new Label();
             label1 = new Label();
-            btn_Save = new Button();
+            btn_OK = new Button();
             SuspendLayout();
             // 
             // lb_EngineRepeated
@@ -55,32 +55,32 @@
             label1.TabIndex = 4;
             label1.Text = "the PLC_Station_Client adapter";
             // 
-            // btn_Save
+            // btn_OK
             // 
-            btn_Save.BackColor = Color.Green;
-            btn_Save.Dock = DockStyle.Bottom;
-            btn_Save.FlatStyle = FlatStyle.Flat;
-            btn_Save.Font = new Font("Segoe UI", 72F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_Save.ForeColor = Color.White;
-            btn_Save.Location = new Point(0, 850);
-            btn_Save.Name = "btn_Save";
-            btn_Save.Size = new Size(1902, 183);
-            btn_Save.TabIndex = 5;
-            btn_Save.Text = "OK";
-            btn_Save.UseVisualStyleBackColor = false;
-            btn_Save.Click += btn_Save_Click;
+            btn_OK.BackColor = Color.Green;
+            btn_OK.Dock = DockStyle.Bottom;
+            btn_OK.FlatStyle = FlatStyle.Flat;
+            btn_OK.Font = new Font("Segoe UI", 72F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_OK.ForeColor = Color.White;
+            btn_OK.Location = new Point(0, 850);
+            btn_OK.Name = "btn_OK";
+            btn_OK.Size = new Size(1902, 183);
+            btn_OK.TabIndex = 5;
+            btn_OK.Text = "OK";
+            btn_OK.UseVisualStyleBackColor = false;
+            btn_OK.Click += btn_OK_Click;
             // 
-            // Form4
+            // CheckAdapter
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.Sem_título;
             BackgroundImageLayout = ImageLayout.Center;
             ClientSize = new Size(1902, 1033);
-            Controls.Add(btn_Save);
+            Controls.Add(btn_OK);
             Controls.Add(label1);
             Controls.Add(lb_EngineRepeated);
-            Name = "Form4";
+            Name = "CheckAdapter";
             Text = "Form4";
             ResumeLayout(false);
             PerformLayout();
@@ -90,6 +90,6 @@
 
         private Label lb_EngineRepeated;
         private Label label1;
-        private Button btn_Save;
+        private Button btn_OK;
     }
 }
