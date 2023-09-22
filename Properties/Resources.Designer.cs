@@ -91,22 +91,22 @@ namespace EngineNumber_checker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CheckAdapter {
+            get {
+                object obj = ResourceManager.GetObject("CheckAdapter", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon Icon1 {
             get {
                 object obj = ResourceManager.GetObject("Icon1", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Sem_título {
-            get {
-                object obj = ResourceManager.GetObject("Sem título", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

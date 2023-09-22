@@ -74,7 +74,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackgroundImage = Properties.Resources.Sem_título;
+            BackgroundImage = Properties.Resources.CheckAdapter;
             BackgroundImageLayout = ImageLayout.Center;
             ClientSize = new Size(1902, 1033);
             Controls.Add(btn_OK);
