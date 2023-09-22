@@ -1,6 +1,6 @@
 ﻿namespace EngineNumber_checker
 {
-    partial class Blinking_form
+    partial class DuplicateDetected
     {
         /// <summary>
         /// Required designer variable.
@@ -136,7 +136,7 @@
             lb_DoYouWantToContinue.TabIndex = 7;
             lb_DoYouWantToContinue.Text = "DO YOU WANT TO CONTINUE?";
             // 
-            // Blinking_form
+            // duplicateDetectedForm
             // 
             AutoScaleMode = AutoScaleMode.Inherit;
             BackColor = Color.Yellow;
@@ -149,7 +149,7 @@
             Controls.Add(lb_RepeatedEngNumValue);
             Controls.Add(btn_ContinueAfterTrigger);
             Controls.Add(btn_StopAfterTrigger);
-            Name = "Blinking_form";
+            Name = "duplicateDetectedForm";
             Text = "/deny";
             WindowState = FormWindowState.Maximized;
             ResumeLayout(false);

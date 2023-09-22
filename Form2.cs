@@ -21,15 +21,15 @@ namespace EngineNumber_checker
         string connectionString = "172.16.0.1";
         string connectionStringSaved = "";
 
-        Form1 form1;
-        public IntervalForm(Form1 f)
+        Main main;
+        public IntervalForm(Main main)
         {
             InitializeComponent();
-            form1 = f;
+            main = main;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ApplicationProperties_FormClosing);
         }
 
-        private Form1 mainForm = null;
+        private Main mainForm = null;
 
         private void ApplicationProperties_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -73,7 +73,7 @@ namespace EngineNumber_checker
             tb_ConnectionString.Text = connectionStringSaved;
             connectionString = connectionStringSaved;
 
-            form1.SaveParameters();
+            main.SaveParameters();
 
             this.Hide();
         }

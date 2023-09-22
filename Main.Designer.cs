@@ -1,6 +1,6 @@
 ﻿namespace EngineNumber_checker
 {
-    partial class Form1
+    partial class Main
     {
         /// <summary>
         ///  Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             btn_Start = new Button();
             Timer2 = new System.Windows.Forms.Timer(components);
             lb_Timer_Tick = new Label();
@@ -120,7 +120,7 @@
             tb_Console.Size = new Size(587, 194);
             tb_Console.TabIndex = 0;
             // 
-            // Form1
+            // main
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -132,7 +132,7 @@
             Controls.Add(btn_Start);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 4, 3, 4);
-            Name = "Form1";
+            Name = "main";
             StartPosition = FormStartPosition.Manual;
             Text = "Atlas Copco - EngineNumber checker";
             pn_StopRunning.ResumeLayout(false);

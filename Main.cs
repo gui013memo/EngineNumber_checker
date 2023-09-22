@@ -1,4 +1,3 @@
-//using EngineNum_match_validator;
 using S7.Net;
 using System.Data.SqlClient;
 using System.Diagnostics;
@@ -8,14 +7,15 @@ using System.Windows.Forms.VisualStyles;
 
 namespace EngineNumber_checker
 {
-    public partial class Form1 : Form
+    public partial class Main : Form
     {
-        Logger my_logger = new Logger();
+        Logger logger = new Logger();
         Process_handler process_Handler = new Process_handler();
 
         SqlConnection cnn;
         SqlCommand command;
         SqlDataReader reader;
+
         string connetionString;
         string timeOffSetForSQL = "3";
         public string CurrentEngine = "";
@@ -23,51 +23,37 @@ namespace EngineNumber_checker
         public string queryResultREG_TM = "";
         public string queryResultREG_DT = "";
 
+        int engineLifeTime = 3;
+
         bool startBtn = false;
 
-        Plc PLC_M1 = new Plc(CpuType.S7300, "140.100.101.1", 0, 2); //MY PC IP ADDRESS: 140.100.101.9 
+        Plc PLC_M1 = new Plc(CpuType.S7300, "140.100.101.1", 0, 2);
 
-        Blinking_form blinking_Form;
-
-        int engineLifeTime = 3;
+        DuplicateDetected duplicateDetectedForm;
         IntervalForm form2;
 
-        public Form1()
+        public Main()
         {
-            blinking_Form = new Blinking_form(this);
+            duplicateDetectedForm = new DuplicateDetected(this, process_Handler, logger);
             form2 = new IntervalForm(this);
+
             InitializeComponent();
-            btn_Start.PerformClick();
+
+            btn_Start.PerformClick();                       //This causes the application to open
+            btn_Start_Click(new object(), new EventArgs()); //and start running immediately.
+
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormIsClosing);
-            btn_Start_Click(new object(), new EventArgs());
         }
 
-        private void FormIsClosing(object sender, FormClosingEventArgs e)
+        private void FormIsClosing(object sender, FormClosingEventArgs e) //This is called when app is closed
         {
-            my_logger.Log("EngineNumber-Checker app Closed!");
+            logger.Log("EngineNumber-Checker app Closed!");
         }
 
-        public void Log(string msg)
+        public void EngineDuplicateDetected()
         {
-            my_logger.Log(msg);
-        }
-
-        public void EngineDuplicate()
-        {
-            blinking_Form.RefreshDataForF3();
-            blinking_Form.Show();
-        }
-
-        public int GetProcessID(string processName)
-        {
-            int id = 0;
-
-            var processes = Process.GetProcessesByName(processName);
-            foreach (var p in processes)
-            {
-                id = p.Id;
-            }
-            return id;
+            duplicateDetectedForm.RefreshData();
+            duplicateDetectedForm.Show();
         }
 
         public string PLC_GetBlockOrHead()
@@ -118,11 +104,11 @@ namespace EngineNumber_checker
             if (CurrentEngine != "")
             {
                 tb_Console.Text = "New engine detected: " + CurrentEngine + "\r\n" + tb_Console.Text;
-                my_logger.Log("New engine detected: " + CurrentEngine);
+                logger.Log("New engine detected: " + CurrentEngine);
 
                 if (PLC_GetBlockOrHead() == "B")
                 {
-                    my_logger.Log("\r\nIt is a BLOCK" + "\r\n");
+                    logger.Log("\r\nIt is a BLOCK" + "\r\n");
 
                     string query = "SELECT TOP (1)" +
                     "[ENG_NO]" +
@@ -166,7 +152,7 @@ namespace EngineNumber_checker
                             queryResultREG_TM = queryResultREG_TM.Insert(5, ":");
 
 
-                            my_logger.Log("REPEATED ENGINE DETECTED: " + CurrentEngine + "\r\n" +
+                            logger.Log("REPEATED ENGINE DETECTED: " + CurrentEngine + "\r\n" +
                                 "Block linked: " + queryResultQualityData + "\r\n" + "Date: " + queryResultREG_DT +
                                 " - " + queryResultREG_TM);
 
@@ -175,17 +161,17 @@ namespace EngineNumber_checker
                                 " - " + queryResultREG_TM + tb_Console.Text;
 
                             tb_Console.Text = "Process Suspended" + tb_Console.Text;
-                            process_Handler.SuspendProcess(GetProcessID("PlcStationClient"));
-                            my_logger.Log("PLC process suspended!");
+                            //process_Handler.SuspendProcess(GetProcessID("PlcStationClient"));
+                            logger.Log("PLC process suspended!");
 
-                            EngineDuplicate();
+                            EngineDuplicateDetected();
                         }
 
                     }
                     else
                     {
                         tb_Console.Text = "=====\r\nResult: OK.\r\n=====" + tb_Console.Text;
-                        my_logger.Log("Result: OK.");
+                        logger.Log("Result: OK.");
                     }
 
                     reader.Close();
@@ -195,7 +181,7 @@ namespace EngineNumber_checker
                 else
                 {
                     tb_Console.Text = "\r\nit was a HEAD - Validation disregarded\r\n" + tb_Console.Text;
-                    my_logger.Log("it is a HEAD - The EngineNumber validation will be disregarded");
+                    logger.Log("it is a HEAD - The EngineNumber validation will be disregarded");
                 }
             }
             else
@@ -219,11 +205,11 @@ namespace EngineNumber_checker
                 lb_Timer_Tick.Text = "Stopped";
 
                 Timer2.Stop();
-                my_logger.Log("EngineNumber-Checker Stopped!");
+                logger.Log("EngineNumber-Checker Stopped!");
             }
             else
             {
-                my_logger.Log("EngineNumber-Checker Started!");
+                logger.Log("EngineNumber-Checker Started!");
 
                 pn_AtlasLogo.Hide();
 
@@ -246,7 +232,7 @@ namespace EngineNumber_checker
             if (tb_Console.Text.Length > 300)
             {
                 tb_Console.Text = "";
-                my_logger.Log("SQL: No recent EngineNumber available TICK");
+                logger.Log("SQL: No recent EngineNumber available TICK");
             }
 
             EngineValidate();

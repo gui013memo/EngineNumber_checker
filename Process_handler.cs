@@ -33,7 +33,19 @@ namespace EngineNumber_checker
         [DllImport("kernel32", CharSet = CharSet.Auto, SetLastError = true)]
         static extern bool CloseHandle(IntPtr handle);
 
-    public void SuspendProcess(int pid)
+        public int GetProcessID(string processName)
+        {
+            int id = 0;
+
+            var processes = Process.GetProcessesByName(processName);
+            foreach (var p in processes)
+            {
+                id = p.Id;
+            }
+            return id;
+        }
+
+        public void SuspendProcess(int pid)
         {
             var process = Process.GetProcessById(pid); // throws exception if process does not exist
 
