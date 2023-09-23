@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace EngineNumber_checker
     public partial class Options : Form
     {
 
+        Main main;
+
         int timerTickMsValue = 1000;
         int timerTickMsValueSaved = 1000;
 
@@ -21,7 +24,6 @@ namespace EngineNumber_checker
         string connectionString = "172.16.0.1";
         string connectionStringSaved = string.Empty;
 
-        Main main;
         public Options(Main main)
         {
             InitializeComponent();
@@ -70,6 +72,11 @@ namespace EngineNumber_checker
             engineLifeTimeSaved = engineLifeTimeMsValue;
             tb_ConnectionString.Text = connectionStringSaved;
             connectionString = connectionStringSaved;
+
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            config.AppSettings.Settings["test"].Value = "blah";
+            config.Save(ConfigurationSaveMode.Modified);
+            ConfigurationManager.RefreshSection("appSettings");
 
             main.SaveParameters();
 
