@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
+using static EngineNumber_checker.DuplicateDetected;
 
 namespace EngineNumber_checker
 {
@@ -254,6 +255,11 @@ namespace EngineNumber_checker
             Timer2.Interval = options.GetTimerTickMsValue;
             engineLifeTime = options.GetEngineLifeTimeMsValueInt;
             Tb_Console.Text = "\r\nPARAMETERS SAVED\r\n" + Tb_Console.Text;
+        }
+
+        private void lb_Timer_Tick_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(duplicateDetectedForm.testPath());
         }
     }
 }

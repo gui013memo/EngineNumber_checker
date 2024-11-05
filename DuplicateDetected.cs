@@ -61,7 +61,7 @@ namespace EngineNumber_checker
             this.Hide();
 
             // Use the desktop shortcut to find the target executable
-            string shortcutPath = @"C:\Users\YourUser\Desktop\PlcStationClient.lnk"; // Update with actual path
+            string shortcutPath = @"C:\Users\Admin\Desktop\1.0.3.2-PLC_Station_Client.lnk"; // Update with actual path
             string targetPath = ShortcutHelper.GetShortcutTarget(shortcutPath);
 
             if (!string.IsNullOrEmpty(targetPath) && File.Exists(targetPath))
@@ -76,8 +76,18 @@ namespace EngineNumber_checker
             }
         }
 
+        public string testPath()
+        {
+            string path = "No path found!";
+
+            string shortcutPath = @"C:\Users\Admin\Desktop\1.0.3.2-PLC_Station_Client.lnk"; // Update with actual path
+            path = ShortcutHelper.GetShortcutTarget(shortcutPath);
+
+            return path;
+        }
+
         // Helper class to retrieve shortcut target path
-        private static class ShortcutHelper
+        public static class ShortcutHelper
         {
             [DllImport("shell32.dll", CharSet = CharSet.Auto)]
             private static extern uint SHGetPathFromIDList(IntPtr pidl, StringBuilder pszPath);
