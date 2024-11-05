@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
+using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EngineNumber_checker
@@ -15,7 +11,6 @@ namespace EngineNumber_checker
     {
         Process_handler process_Handler;
         Logger logger;
-
         Main main;
 
         public DuplicateDetected(Main main, Process_handler process_Handler, Logger logger)
@@ -42,10 +37,10 @@ namespace EngineNumber_checker
 
         private void ApplicationProperties_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //Hiding the window, because closing it makes the window unaccessible.
+            // Hiding the window, because closing it makes the window unaccessible.
             this.Hide();
             this.Parent = null;
-            e.Cancel = true; //hides the form, cancels closing event
+            e.Cancel = true; // hides the form, cancels closing event
         }
 
         private void btn_ContinueAfterTrigger_Click(object sender, EventArgs e)
@@ -64,12 +59,61 @@ namespace EngineNumber_checker
             main.Tb_Console.Text = "PLC_Client Adapter process killed!" + main.Tb_Console.Text;
             main.Timer2.Start();
             this.Hide();
-            //form4.Show();
 
-            Process yourProcess = new Process();
-            yourProcess.StartInfo.FileName = @"C:\SW\SQS Client\ACA\App\PlcStationClient.exe";
+            // Use the desktop shortcut to find the target executable
+            string shortcutPath = @"C:\Users\YourUser\Desktop\PlcStationClient.lnk"; // Update with actual path
+            string targetPath = ShortcutHelper.GetShortcutTarget(shortcutPath);
 
-            yourProcess.Start();
+            if (!string.IsNullOrEmpty(targetPath) && File.Exists(targetPath))
+            {
+                Process yourProcess = new Process();
+                yourProcess.StartInfo.FileName = targetPath;
+                yourProcess.Start();
+            }
+            else
+            {
+                logger.Log("Shortcut target not found or invalid. The PLC Station Client will not restart");
+            }
+        }
+
+        // Helper class to retrieve shortcut target path
+        private static class ShortcutHelper
+        {
+            [DllImport("shell32.dll", CharSet = CharSet.Auto)]
+            private static extern uint SHGetPathFromIDList(IntPtr pidl, StringBuilder pszPath);
+
+            [DllImport("shell32.dll", CharSet = CharSet.Auto)]
+            private static extern int SHGetDesktopFolder(out IntPtr ppshf);
+
+            public static string GetShortcutTarget(string shortcutPath)
+            {
+                if (string.IsNullOrEmpty(shortcutPath) || !File.Exists(shortcutPath))
+                    return null;
+
+                StringBuilder path = new StringBuilder(260); // MAX_PATH
+                IntPtr pidl = IntPtr.Zero;
+
+                try
+                {
+                    // Checking for success (0 means success)
+                    if (SHGetDesktopFolder(out pidl) == 0)
+                    {
+                        if (SHGetPathFromIDList(pidl, path) != 0) // Check if SHGetPathFromIDList is successful
+                        {
+                            return path.ToString();
+                        }
+                    }
+                }
+                finally
+                {
+                    if (pidl != IntPtr.Zero)
+                    {
+                        Marshal.FreeCoTaskMem(pidl);
+                    }
+                }
+
+                return null;
+            }
 
         }
     }
